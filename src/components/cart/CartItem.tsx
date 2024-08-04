@@ -1,4 +1,4 @@
-import { CartItemProps } from '../../types/cartTypes';
+import { CartItemProps } from '../../types/CartTypes';
 
 const CartItem: React.FC<CartItemProps> = ({ cart }) => {
   const { image, title, price, quantity, total } = cart;

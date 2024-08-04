@@ -2,7 +2,7 @@ import assets from '../assets/assets';
 import CartItem from '../components/cart/CartItem';
 import CartTotal from '../components/shared/CartTotal';
 import Container from '../components/shared/Container';
-import { CartTypes } from '../types/cartTypes';
+import { CartTypes } from '../types/CartTypes';
 
 const cartData: CartTypes[] = [
   {
