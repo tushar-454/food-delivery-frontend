@@ -27,7 +27,7 @@ export const NavsDesktop = () => {
     <nav>
       <ul className='flex gap-8 text-lg font-semibold'>
         {navs.map((nav: NavsType) => (
-          <li>
+          <li key={Math.random()}>
             <NavLink to={nav.link} className={`text-neutral-500`}>
               {({ isActive }) => <span className={isActive ? 'activeNav' : ''}>{nav.name}</span>}
             </NavLink>
@@ -55,7 +55,7 @@ export const NavsMobile = () => {
 
       <ul className='flex flex-col gap-4 text-lg font-semibold'>
         {navs.map((nav: NavsType) => (
-          <li onClick={() => setIsMenuOpen(false)}>
+          <li key={Math.random()} onClick={() => setIsMenuOpen(false)}>
             <NavLink to={nav.link} className={`text-neutral-500`}>
               {({ isActive }) => <span className={isActive ? 'activeNav' : ''}>{nav.name}</span>}
             </NavLink>
