@@ -1,4 +1,5 @@
 import cart from './basket_icon.png';
+import food from './food_1.png';
 import carouselImg from './header_img.png';
 import logo from './logo.png';
 import salad from './menu_1.png';
@@ -26,6 +27,7 @@ const assets = {
   pureVeg,
   pasta,
   noodles,
+  food,
 };
 
 export default assets;
