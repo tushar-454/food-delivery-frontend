@@ -1,10 +1,13 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import assets from '../../assets/assets';
+import { login } from '../../features/publicState/publicStateSlices';
 import Container from '../shared/Container';
 import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
   const isUserLogin = false;
+  const dispatch = useDispatch();
   return (
     <header>
       <Container>
@@ -12,7 +15,7 @@ const Header = () => {
         <div className='flex items-center justify-between py-4'>
           {/* header component logo  */}
           <div>
-            <img src={assets.logo} alt='logo' className='lmo:w-auto w-24' />
+            <img src={assets.logo} alt='logo' className='w-24 lmo:w-auto' />
           </div>
           {/* header component nav */}
           <div className='hidden lg:block'>
@@ -36,7 +39,9 @@ const Header = () => {
                 <img src={assets.profile} alt='profile_icon' />
               </Link>
             ) : (
-              <button className='primaryBtn'>Sign In</button>
+              <button onClick={() => dispatch(login())} className='primaryBtn'>
+                Sign In
+              </button>
             )}
           </div>
         </div>

@@ -1,6 +1,13 @@
 import { RxCross2 } from 'react-icons/rx';
+import { useDispatch } from 'react-redux';
+import { login, signup } from '../../features/publicState/publicStateSlices';
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const handleGotoLogin = () => {
+    dispatch(signup());
+    dispatch(login());
+  };
   return (
     <section className='fixed left-0 top-0 h-full w-full bg-[#00000099]'>
       <div className='grid w-full place-content-center'>
@@ -10,7 +17,7 @@ const Signup = () => {
           <div className='flex w-full items-center justify-between'>
             <h2 className='text-2xl font-bold'>Signup</h2>
             <span>
-              <RxCross2 className='cursor-pointer text-2xl' />
+              <RxCross2 onClick={() => dispatch(signup())} className='cursor-pointer text-2xl' />
             </span>
           </div>
           {/* Signup form  */}
@@ -38,7 +45,9 @@ const Signup = () => {
           </form>
           <p>
             Already have an account?{' '}
-            <span className='cursor-pointer text-orange-500'>Click here</span>
+            <span onClick={handleGotoLogin} className='cursor-pointer text-orange-500'>
+              Click here
+            </span>
           </p>
         </div>
       </div>
