@@ -1,0 +1,28 @@
+import React from 'react';
+import { CartTotalProps } from '../../types/cartTypes';
+
+const CartTotal: React.FC<CartTotalProps> = ({ asUse }) => {
+  return (
+    <div className='w-full lg:w-1/2'>
+      <h2 className='text-2xl font-semibold'>Cart Total</h2>
+      <div>
+        <p className='flex items-center justify-between border-b p-2 text-neutral-500'>
+          <span>Subtotal</span>
+          <span>$60</span>
+        </p>
+        <p className='flex items-center justify-between border-b p-2 text-neutral-500'>
+          <span>Delivery fee</span>
+          <span>$5</span>
+        </p>
+        <p className='flex items-center justify-between p-2 font-semibold text-neutral-900'>
+          <span>Total</span>
+          <span>$65</span>
+        </p>
+      </div>
+      {asUse === 'cart' && <button className='bgOrangeBtn mt-5'>Proceed to Checkout</button>}
+      {asUse === 'payment' && <button className='bgOrangeBtn mt-5'>Proceed to Payment</button>}
+    </div>
+  );
+};
+
+export default CartTotal;
