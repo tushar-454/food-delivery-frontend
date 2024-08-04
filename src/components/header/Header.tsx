@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import assets from '../../assets/assets';
 import Container from '../shared/Container';
-import Navs from './Navs';
+import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
   const isUserLogin = false;
@@ -15,10 +15,15 @@ const Header = () => {
             <img src={assets.logo} alt='logo' />
           </div>
           {/* header component nav */}
-          <Navs />
+          <div className='hidden lg:block'>
+            <NavsDesktop />
+          </div>
+          <div className='block lg:hidden'>
+            <NavsMobile />
+          </div>
           {/* header component search+cart+signin button if user not logged in  */}
           {/* header component search+cart+profile button if user logged in  */}
-          <div className='flex items-center justify-center gap-8'>
+          <div className='flex items-center justify-center gap-5 sm:gap-8'>
             <Link to={'/search'}>
               <img src={assets.search} alt='search_icon' />
             </Link>
