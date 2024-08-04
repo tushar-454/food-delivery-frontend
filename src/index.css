@@ -25,3 +25,15 @@ body {
     @apply rounded-lg bg-orange-500 px-5 py-2 text-center text-white transition-all hover:bg-orange-600;
   }
 }
+
+.slowDownToptoBottom {
+  animation: slowDownToptoBottom 0.5s ease;
+}
+@keyframes slowDownToptoBottom {
+  0% {
+    transform: translateY(-4rem);
+  }
+  100% {
+    transform: translateY(0rem);
+  }
+}

@@ -12,7 +12,7 @@ const Signup = () => {
     <section className='fixed left-0 top-0 h-full w-full bg-[#00000099]'>
       <div className='grid w-full place-content-center'>
         {/* Signup divition  */}
-        <div className='mt-32 w-full rounded-lg bg-white p-4 py-5 mmo:w-[375px]'>
+        <div className='slowDownToptoBottom mt-32 w-full rounded-lg bg-white p-4 py-5 mmo:w-[375px]'>
           {/* title and cross icon  */}
           <div className='flex w-full items-center justify-between'>
             <h2 className='text-2xl font-bold'>Signup</h2>
