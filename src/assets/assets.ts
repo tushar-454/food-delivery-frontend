@@ -1,3 +1,4 @@
+import appstore from './app_store.png';
 import cart from './basket_icon.png';
 import food from './food_1.png';
 import carouselImg from './header_img.png';
@@ -10,6 +11,7 @@ import coke from './menu_5.png';
 import pureVeg from './menu_6.png';
 import pasta from './menu_7.png';
 import noodles from './menu_8.png';
+import playstore from './play_store.png';
 import profile from './profile_icon.png';
 import search from './search_icon.png';
 
@@ -28,6 +30,8 @@ const assets = {
   pasta,
   noodles,
   food,
+  playstore,
+  appstore,
 };
 
 export default assets;

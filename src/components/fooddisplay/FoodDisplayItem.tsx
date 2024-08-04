@@ -36,7 +36,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
         )}
       </div>
       <div className='space-y-2 px-3 py-5'>
-        <div className='flex items-center justify-between'>
+        <div className='flex justify-between gap-4'>
           <span className='text-xl font-bold'>{name}</span>
           <Rating rating={rating} />
         </div>
