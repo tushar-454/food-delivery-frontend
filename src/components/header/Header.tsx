@@ -7,7 +7,7 @@ import Container from '../shared/Container';
 import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
-  const isUserLogin = false;
+  const isUserLogin = true;
   const cartItem = useSelector((state: RootState) => state.publicStates[2].cartItem);
   const dispatch = useDispatch();
   return (
@@ -42,7 +42,7 @@ const Header = () => {
             </Link>
             {/* conditionally render profile icon or sign in button based on user login status */}
             {isUserLogin ? (
-              <Link to={'/profile'}>
+              <Link to={'/dashboard'}>
                 <img src={assets.profile} alt='profile_icon' />
               </Link>
             ) : (
