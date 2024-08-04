@@ -15,7 +15,9 @@ const Header = () => {
         <div className='flex items-center justify-between py-4'>
           {/* header component logo  */}
           <div>
-            <img src={assets.logo} alt='logo' className='w-24 lmo:w-auto' />
+            <Link to='/'>
+              <img src={assets.logo} alt='logo' className='w-24 lmo:w-auto' />
+            </Link>
           </div>
           {/* header component nav */}
           <div className='hidden lg:block'>

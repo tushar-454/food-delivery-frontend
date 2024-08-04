@@ -1,4 +1,5 @@
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import assets from '../../assets/assets';
 import Container from '../shared/Container';
 
@@ -13,7 +14,9 @@ const Footer = () => {
             <div>
               {/* footer logo */}
               <div className='space-y-5'>
-                <img src={assets.logo} alt='logo' />
+                <Link to='/' onClick={() => scrollTo(0, 0)}>
+                  <img src={assets.logo} alt='logo' />
+                </Link>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptates eum
                   velit eius itaque ut, optio id reiciendis magni saepe. Dolorem aperiam quaerat
