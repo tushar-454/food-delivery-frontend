@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FoodItemProps } from '../../types/FoodsDisplayTypes';
+import Rating from '../../utils/Rating';
 
 const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
   const { desc, image, name, price, rating } = foodItem;
@@ -37,7 +38,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
       <div className='space-y-2 px-3 py-5'>
         <div className='flex items-center justify-between'>
           <span className='text-xl font-bold'>{name}</span>
-          <span>{rating}</span>
+          <Rating rating={rating} />
         </div>
         <p className='text-neutral-500'>{desc}</p>
         <p className='text-2xl font-black text-orange-600'>${price}</p>

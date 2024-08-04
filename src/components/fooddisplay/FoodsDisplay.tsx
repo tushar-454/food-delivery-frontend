@@ -9,7 +9,14 @@ const FoodsDisplayData: FoodsDisplayTypes[] = [
     image: assets.food,
     name: 'Greek salad',
     price: 12,
-    rating: 4,
+    rating: 3,
+  },
+  {
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, officia?',
+    image: assets.food,
+    name: 'Greek salad',
+    price: 12,
+    rating: 5,
   },
   {
     desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, officia?',
@@ -23,14 +30,7 @@ const FoodsDisplayData: FoodsDisplayTypes[] = [
     image: assets.food,
     name: 'Greek salad',
     price: 12,
-    rating: 4,
-  },
-  {
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, officia?',
-    image: assets.food,
-    name: 'Greek salad',
-    price: 12,
-    rating: 4,
+    rating: 2,
   },
 ];
 
