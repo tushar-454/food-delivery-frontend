@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CartTotalProps } from '../../types/cartTypes';
 
 const CartTotal: React.FC<CartTotalProps> = ({ asUse }) => {
@@ -19,8 +20,12 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse }) => {
           <span>$65</span>
         </p>
       </div>
-      {asUse === 'cart' && <button className='bgOrangeBtn mt-5'>Proceed to Checkout</button>}
-      {asUse === 'payment' && <button className='bgOrangeBtn mt-5'>Proceed to Payment</button>}
+      {asUse === 'cart' && (
+        <Link to='/order' className='bgOrangeBtn mt-5 inline-block'>
+          Proceed to Checkout
+        </Link>
+      )}
+      {asUse === 'order' && <button className='bgOrangeBtn mt-5'>Proceed to Payment</button>}
     </div>
   );
 };
