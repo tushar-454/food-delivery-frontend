@@ -7,3 +7,12 @@
 body {
   font-family: 'Outfit', sans-serif !important;
 }
+
+@layer components {
+  .activeNav {
+    @apply text-neutral-900 underline underline-offset-4;
+  }
+  .primaryBtn {
+    @apply rounded-full border border-orange-700 bg-white px-5 py-2 text-center font-bold text-neutral-900 transition-all hover:bg-orange-50;
+  }
+}
