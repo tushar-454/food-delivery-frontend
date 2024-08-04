@@ -27,6 +27,9 @@ body {
   .bgOrangeBtn {
     @apply rounded-lg bg-orange-500 px-5 py-2 text-center text-white transition-all hover:bg-orange-600;
   }
+  .bgDangerBtn {
+    @apply rounded-lg bg-red-100 px-5 py-2 text-center text-neutral-900 transition-all hover:bg-red-200 disabled:cursor-not-allowed disabled:bg-red-50 disabled:text-neutral-500;
+  }
 }
 
 .slowDownToptoBottom {
