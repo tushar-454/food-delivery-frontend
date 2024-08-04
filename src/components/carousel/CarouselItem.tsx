@@ -7,9 +7,12 @@ const CarouselItem: React.FC<CarouselProps> = ({ carousel }) => {
     <div className='group relative h-full min-w-full'>
       <img src={image} alt={title} />
       <span className='absolute left-0 top-0 block h-full w-full rounded-xl transition-all group-hover:bg-[#00000099]'></span>
-      <div className='absolute bottom-0 left-0 w-3/5 space-y-5 px-16 py-5'>
-        <h1 className='text-6xl font-bold text-white'>{title}</h1>
-        <p className='text-white'>{description}</p>
+      <div className='lmospace-y-1 absolute bottom-0 left-0 w-full px-2 py-5 sm:px-16 lg:w-3/5 lg:space-y-5'>
+        <h1 className='text-xl font-bold text-white sm:text-2xl md:text-4xl lg:text-6xl'>
+          {title}
+        </h1>
+        <p className='lmo:block hidden text-white'>{description}</p>
+        <p className='lmo:hidden block text-white'>{description.slice(0, 30)} . . .</p>
         <Link to={buttonLink} className='secondaryBtn inline-block'>
           {buttonText}
         </Link>

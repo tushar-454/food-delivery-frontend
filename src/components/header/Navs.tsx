@@ -42,7 +42,7 @@ export const NavsMobile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <nav
-      className={`fixed top-0 min-h-screen w-60 bg-neutral-100 px-5 py-2 transition-all ${isMenuOpen ? 'left-0' : '-left-60'}`}
+      className={`fixed top-0 z-[99999] min-h-screen w-60 bg-neutral-100 px-5 py-2 transition-all ${isMenuOpen ? 'left-0' : '-left-60'}`}
     >
       <span
         className={`absolute -right-10 top-1/2 -translate-y-1/2 cursor-pointer rounded-r-full bg-neutral-100 p-2 text-3xl text-orange-600`}
