@@ -11,6 +11,7 @@ import coke from './menu_5.png';
 import pureVeg from './menu_6.png';
 import pasta from './menu_7.png';
 import noodles from './menu_8.png';
+import parcel from './parcel_icon.png';
 import playstore from './play_store.png';
 import profile from './profile_icon.png';
 import search from './search_icon.png';
@@ -32,6 +33,7 @@ const assets = {
   food,
   playstore,
   appstore,
+  parcel,
 };
 
 export default assets;
