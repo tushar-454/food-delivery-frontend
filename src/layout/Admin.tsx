@@ -8,7 +8,7 @@ const Admin = () => {
       <AdminHeader />
       <div className='flex'>
         <AdminSidebar />
-        <div className='h-screen w-screen flex-grow bg-neutral-100'>
+        <div className='h-screen w-screen flex-grow bg-neutral-100 p-10'>
           <Outlet />
         </div>
       </div>
