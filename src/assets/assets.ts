@@ -1,3 +1,4 @@
+import addIcon from './add_icon_white.png';
 import appstore from './app_store.png';
 import cart from './basket_icon.png';
 import food from './food_1.png';
@@ -34,6 +35,7 @@ const assets = {
   playstore,
   appstore,
   parcel,
+  addIcon,
 };
 
 export default assets;

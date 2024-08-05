@@ -30,6 +30,9 @@ body {
   .bgDangerBtn {
     @apply rounded-lg bg-red-100 px-5 py-2 text-center text-neutral-900 transition-all hover:bg-red-200 disabled:cursor-not-allowed disabled:bg-red-50 disabled:text-neutral-500;
   }
+  .bgBlackBtn {
+    @apply rounded-lg bg-black px-5 py-2 text-center text-neutral-100 transition-all hover:bg-black disabled:cursor-not-allowed disabled:bg-black/10 disabled:text-neutral-500;
+  }
 }
 
 .slowDownToptoBottom {
