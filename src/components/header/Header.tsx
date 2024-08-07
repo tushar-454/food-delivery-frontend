@@ -7,9 +7,10 @@ import Container from '../shared/Container';
 import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
-  const isUserLogin = true;
+  const isUserLogin = useSelector((state: RootState) => state.auth.user);
   const cartItem = useSelector((state: RootState) => state.publicStates[2].cartItem);
   const dispatch = useDispatch();
+
   return (
     <header>
       <Container>
@@ -42,9 +43,17 @@ const Header = () => {
             </Link>
             {/* conditionally render profile icon or sign in button based on user login status */}
             {isUserLogin ? (
-              <Link to={'/dashboard'}>
-                <img src={assets.profile} alt='profile_icon' />
-              </Link>
+              <>
+                {isUserLogin?.role === 'admin' ? (
+                  <Link to={'/dashboard'}>
+                    <img src={assets.profile} alt='profile_icon' />
+                  </Link>
+                ) : (
+                  <Link to={'/myorders'}>
+                    <img src={assets.profile} alt='profile_icon' />
+                  </Link>
+                )}
+              </>
             ) : (
               <button onClick={() => dispatch(login())} className='primaryBtn'>
                 Sign In

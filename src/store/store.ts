@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReducers from '../features/auth/authSlices';
 import publicStatesReducers from '../features/publicState/publicStateSlices';
 
 const store = configureStore({
   reducer: {
     publicStates: publicStatesReducers,
+    auth: authReducers,
   },
 });
 
