@@ -3,9 +3,13 @@ export interface FoodItemProps {
 }
 
 export type FoodsDisplayTypes = {
+  _id: string;
   image: string;
   name: string;
-  desc: string;
+  category: string;
+  description: string;
   price: number;
   rating: number;
+  isAvailable: boolean;
+  dicount: number;
 };

@@ -6,13 +6,11 @@ export type OrderItemType = {
   name: string;
   price: number;
   quantity: number;
-  image: string;
 };
 
 export type MyOrderType = {
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: number;
+  _id: string;
+  status: string;
+  total: number;
   orderItems: OrderItemType[];
 };

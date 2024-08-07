@@ -3,6 +3,8 @@ export interface ExploreMenuItemProps {
 }
 
 export type ExploreMenuType = {
+  _id: string;
   image: string;
   name: string;
+  category: string;
 };
