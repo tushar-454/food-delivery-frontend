@@ -57,3 +57,16 @@ export const signupUser = createAsyncThunk(
     }
   },
 );
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  try {
+    const res = await axios.delete(`/token/delete`);
+    if (res.status === 204) {
+      return {
+        status: res.status,
+      };
+    }
+  } catch (error) {
+    throw new Error();
+  }
+});

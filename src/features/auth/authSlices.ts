@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, token } from '../../api/auth';
+import { loginUser, logout, token } from '../../api/auth';
 import { initialStateType } from '../../types/authSlicesTypes';
 
 const initialState: initialStateType = {
@@ -26,6 +26,12 @@ const authSlices = createSlice({
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
+      })
+      // logout reducer start
+      .addCase(logout.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.user = null;
       })
       // token reducer start
       .addCase(token.pending, (state) => {
