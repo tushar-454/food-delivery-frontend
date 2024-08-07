@@ -1,44 +1,17 @@
-import assets from '../../assets/assets';
-import { ExploreMenuType } from '../../types/ExploreMenu';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategorise } from '../../features/auth/categoriseSlices';
+import { AppDispatch, RootState } from '../../store/store';
+import { CategoryItemType } from '../../types/categoriseSlicesTypes';
 import Container from '../shared/Container';
 import ExploreMenuItem from './ExploreMenuItem';
 
-const exploremenus: ExploreMenuType[] = [
-  {
-    image: assets.salad,
-    name: 'Salad',
-  },
-  {
-    image: assets.rolls,
-    name: 'Rolls',
-  },
-  {
-    image: assets.deserts,
-    name: 'Deserts',
-  },
-  {
-    image: assets.sandwich,
-    name: 'Sandwich',
-  },
-  {
-    image: assets.coke,
-    name: 'Coke',
-  },
-  {
-    image: assets.pureVeg,
-    name: 'Pure Veg',
-  },
-  {
-    image: assets.pasta,
-    name: 'Pasta',
-  },
-  {
-    image: assets.noodles,
-    name: 'Noodles',
-  },
-];
-
 const ExploreMenu = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoading, isError, categorise } = useSelector((state: RootState) => state.categorise);
+  useEffect(() => {
+    dispatch(getCategorise());
+  }, [dispatch]);
   return (
     <section>
       <Container>
@@ -52,11 +25,17 @@ const ExploreMenu = () => {
           </p>
         </div>
         {/* all food menus  */}
-        <div className='my-10 flex flex-wrap items-center justify-evenly gap-4 border-b-2 pb-8'>
-          {exploremenus.map((menu: ExploreMenuType) => (
-            <ExploreMenuItem key={Math.random()} menu={menu} />
-          ))}
-        </div>
+        {isLoading && <p>Loading...</p>}
+        {isError && (
+          <p className='my-10 animate-pulse text-red-500'>Something went wrong getting menu</p>
+        )}
+        {!isError && !isLoading && (categorise ?? []).length > 0 && (
+          <div className='my-10 flex flex-wrap items-center justify-evenly gap-4 border-b-2 pb-8'>
+            {categorise?.map((menu: CategoryItemType) => (
+              <ExploreMenuItem key={menu._id} menu={menu} />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );
