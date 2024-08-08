@@ -3,7 +3,7 @@ import { loginUser, logout, token } from '../../api/auth';
 import { initialStateType } from '../../types/authSlicesTypes';
 
 const initialState: initialStateType = {
-  isLoading: false,
+  isLoading: true,
   isError: false,
   user: null,
 };

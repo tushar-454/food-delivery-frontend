@@ -8,6 +8,7 @@ import Cart from '../pages/Cart';
 import Home from '../pages/Home';
 import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
+import PrivateRoute from './PrivateRoute';
 
 const Routes = createBrowserRouter([
   {
@@ -20,15 +21,27 @@ const Routes = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart />,
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/order',
-        element: <Order />,
+        element: (
+          <PrivateRoute>
+            <Order />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/profile/myorders',
-        element: <MyOrders />,
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -38,19 +51,35 @@ const Routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AddItem />,
+        element: (
+          <PrivateRoute>
+            <AddItem />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'additem',
-        element: <AddItem />,
+        element: (
+          <PrivateRoute>
+            <AddItem />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'listitems',
-        element: <ListItems />,
+        element: (
+          <PrivateRoute>
+            <ListItems />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'orders',
-        element: <Orders />,
+        element: (
+          <PrivateRoute>
+            <Orders />
+          </PrivateRoute>
+        ),
       },
     ],
   },
