@@ -1,15 +1,32 @@
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../../api/auth';
 import assets from '../../assets/assets';
 import { login } from '../../features/publicState/publicStateSlices';
-import { RootState } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import Container from '../shared/Container';
 import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
   const isUserLogin = useSelector((state: RootState) => state.auth.user);
   const cartItem = useSelector((state: RootState) => state.publicStates[2].cartItem);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  // handle logout function
+  const handleLogout = async () => {
+    try {
+      const { payload } = await dispatch(logout());
+      if ((payload as { status: number }).status === 204) {
+        toast.success('Logout successfully');
+        navigate('/');
+      }
+    } catch (error) {
+      toast.error('Logout failed');
+    }
+  };
 
   return (
     <header>
@@ -49,9 +66,17 @@ const Header = () => {
                     <img src={assets.profile} alt='profile_icon' />
                   </Link>
                 ) : (
-                  <Link to={'/myorders'}>
-                    <img src={assets.profile} alt='profile_icon' />
-                  </Link>
+                  <>
+                    {pathname.includes('profile') ? (
+                      <button onClick={handleLogout}>
+                        <img src={assets.logout} alt='logout_icon' />
+                      </button>
+                    ) : (
+                      <Link to={'/profile/myorders'}>
+                        <img src={assets.profile} alt='profile_icon' />
+                      </Link>
+                    )}
+                  </>
                 )}
               </>
             ) : (

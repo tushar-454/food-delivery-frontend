@@ -27,7 +27,7 @@ const Routes = createBrowserRouter([
         element: <Order />,
       },
       {
-        path: '/myorders',
+        path: '/profile/myorders',
         element: <MyOrders />,
       },
     ],

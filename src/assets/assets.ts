@@ -4,6 +4,7 @@ import cart from './basket_icon.png';
 import food from './food_1.png';
 import carouselImg from './header_img.png';
 import logo from './logo.png';
+import logout from './logout_icon.png';
 import salad from './menu_1.png';
 import rolls from './menu_2.png';
 import deserts from './menu_3.png';
@@ -36,6 +37,7 @@ const assets = {
   appstore,
   parcel,
   addIcon,
+  logout,
 };
 
 export default assets;
