@@ -8,6 +8,7 @@ import Cart from '../pages/Cart';
 import Home from '../pages/Home';
 import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
+import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = createBrowserRouter([
@@ -53,7 +54,9 @@ const Routes = createBrowserRouter([
         index: true,
         element: (
           <PrivateRoute>
-            <AddItem />
+            <AdminRoute>
+              <AddItem />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -61,7 +64,9 @@ const Routes = createBrowserRouter([
         path: 'additem',
         element: (
           <PrivateRoute>
-            <AddItem />
+            <AdminRoute>
+              <AddItem />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -69,7 +74,9 @@ const Routes = createBrowserRouter([
         path: 'listitems',
         element: (
           <PrivateRoute>
-            <ListItems />
+            <AdminRoute>
+              <ListItems />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -77,7 +84,9 @@ const Routes = createBrowserRouter([
         path: 'orders',
         element: (
           <PrivateRoute>
-            <Orders />
+            <AdminRoute>
+              <Orders />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
