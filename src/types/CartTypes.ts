@@ -3,6 +3,7 @@ export interface CartItemProps {
 }
 export interface CartTotalProps {
   asUse: string;
+  cart: CartTypes[];
 }
 
 export type CartTypes = {

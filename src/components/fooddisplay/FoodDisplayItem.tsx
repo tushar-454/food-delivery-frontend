@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, deleteCart, updateCart } from '../../api/cart';
+import { addToCart, deleteCart, getCarts, updateCart } from '../../api/cart';
 import { AppDispatch, RootState } from '../../store/store';
 import { FoodItemProps } from '../../types/FoodsDisplayTypes';
 import Rating from '../../utils/Rating';
@@ -26,6 +26,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
       }),
     );
     setCartId(payload._id);
+    await dispatch(getCarts(user?._id || ''));
   };
 
   const handleAddFood = async (action: string) => {
@@ -39,6 +40,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
       } else {
         setIsAdded(false);
         await dispatch(deleteCart(cartId));
+        await dispatch(getCarts(user?._id || ''));
       }
     }
   };

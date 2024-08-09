@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToCart, deleteCart, updateCart } from '../../api/cart';
+import { addToCart, deleteCart, getCarts, updateCart } from '../../api/cart';
 import { CartSliceinitialStateType } from '../../types/cartSlicesTypes';
 
 const initialState: CartSliceinitialStateType = {
   isLoading: false,
   isError: false,
   cart: { userId: '', image: '', name: '', price: 0, quantity: 0, total: 0 },
+  carts: [],
 };
 
 const cartSlices = createSlice({
@@ -44,6 +45,19 @@ const cartSlices = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.cart = { userId: '', image: '', name: '', price: 0, quantity: 0, total: 0 };
+      })
+      .addCase(getCarts.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(getCarts.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.carts = payload;
+      })
+      .addCase(getCarts.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
       });
   },
 });

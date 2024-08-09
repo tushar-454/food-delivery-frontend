@@ -11,4 +11,5 @@ export type CartSliceinitialStateType = {
   isLoading: boolean;
   isError: boolean;
   cart: initialStateType;
+  carts: initialStateType[];
 };

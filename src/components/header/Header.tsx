@@ -10,7 +10,7 @@ import { NavsDesktop, NavsMobile } from './Navs';
 
 const Header = () => {
   const isUserLogin = useSelector((state: RootState) => state.auth.user);
-  const cartItem = useSelector((state: RootState) => state.publicStates[2].cartItem);
+  const { carts } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const Header = () => {
             <Link to={'/cart'} className='relative'>
               <img src={assets.cart} alt='cart_icon' />
               <span className='absolute -right-4 -top-2 grid size-6 place-content-center rounded-full bg-orange-500 p-2 text-white'>
-                {cartItem}
+                {(carts && Array.isArray(carts) && carts.length) || 0}
               </span>
             </Link>
             {/* conditionally render profile icon or sign in button based on user login status */}

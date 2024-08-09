@@ -19,3 +19,8 @@ export const deleteCart = createAsyncThunk('cart/deleteCart', async (id: string)
   const response = await axios.delete(`/user/cart/${id}`);
   return response.data;
 });
+
+export const getCarts = createAsyncThunk('cart/getCarts', async (userId: string) => {
+  const response = await axios.get(`/user/carts/${userId}`);
+  return response.data;
+});
