@@ -19,3 +19,12 @@ export const getFoods = createAsyncThunk('food/getFoods', async () => {
     throw new Error();
   }
 });
+
+export const getAdminFoods = createAsyncThunk('food/getAdminFoods', async () => {
+  try {
+    const res = await axios.get('/admin/foods');
+    return res.data;
+  } catch (error) {
+    throw new Error();
+  }
+});

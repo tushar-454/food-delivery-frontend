@@ -1,29 +1,17 @@
-import assets from '../../../assets/assets';
-import { FoodListsTypes } from '../../../types/FoodListsTypes';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdminFoods } from '../../../api/food';
+import { AppDispatch, RootState } from '../../../store/store';
+import { FoodsDisplayTypes } from '../../../types/foodSlicesTypes';
 import ListItem from './ListItem';
 
-const foodLists: FoodListsTypes[] = [
-  {
-    category: 'Fast Food Fast Food',
-    image: assets.salad,
-    name: 'BurgerFast Food Fast Food Fast Food ',
-    price: 100,
-  },
-  {
-    category: 'Fast Food',
-    image: assets.salad,
-    name: 'Burger',
-    price: 100,
-  },
-  {
-    category: 'Fast Food',
-    image: assets.salad,
-    name: 'Burger',
-    price: 100,
-  },
-];
-
 const ListItems = () => {
+  const { food: foodLists, isError, isLoading } = useSelector((state: RootState) => state.food);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(getAdminFoods());
+  }, [dispatch]);
+
   return (
     <div>
       <h2 className='text-xl font-semibold'>All Foods List</h2>
@@ -39,11 +27,19 @@ const ListItems = () => {
               <td className='p-4 font-bold'>Action</td>
             </tr>
           </thead>
-          <tbody>
-            {foodLists.map((foodList: FoodListsTypes) => (
-              <ListItem key={Math.random()} foodList={foodList} />
-            ))}
-          </tbody>
+          {isLoading && <p>Loading...</p>}
+          {isError && (
+            <p className='my-10 animate-pulse text-red-500'>
+              Something went wrong getting food lists
+            </p>
+          )}
+          {!isError && !isLoading && Array.isArray(foodLists) && (
+            <tbody>
+              {foodLists.map((foodList: FoodsDisplayTypes) => (
+                <ListItem key={Math.random()} foodList={foodList} />
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
