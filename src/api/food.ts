@@ -28,3 +28,12 @@ export const getAdminFoods = createAsyncThunk('food/getAdminFoods', async () => 
     throw new Error();
   }
 });
+
+export const deleteFood = createAsyncThunk('food/deleteFood', async (id) => {
+  try {
+    const res = await axios.delete(`/admin/food/${id}`);
+    return res.data;
+  } catch (error) {
+    throw new Error();
+  }
+});

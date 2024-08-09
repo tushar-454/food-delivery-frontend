@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createFood, getAdminFoods, getFoods } from '../../api/food';
+import { createFood, deleteFood, getAdminFoods, getFoods } from '../../api/food';
 import { initialStateType } from './../../types/foodSlicesTypes';
 
 const initialState: initialStateType = {
@@ -57,6 +57,22 @@ const foodSlices = createSlice({
         state.food = action.payload;
       })
       .addCase(getAdminFoods.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.food = null;
+      });
+    builder
+      .addCase(deleteFood.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.food = null;
+      })
+      .addCase(deleteFood.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.food = action.payload;
+      })
+      .addCase(deleteFood.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.food = null;

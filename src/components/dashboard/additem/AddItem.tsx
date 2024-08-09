@@ -63,7 +63,7 @@ const AddItem = () => {
   }, [dispatch]);
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex flex-col gap-10 lg:flex-row'>
       <form
         className='w-full space-y-5 md:w-4/5 lg:w-3/5 xl:w-1/2 2xl:w-1/3'
         onSubmit={handleSubmit}

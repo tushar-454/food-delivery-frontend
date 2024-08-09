@@ -26,8 +26,14 @@ const FoodsDisplay = () => {
         {/* all foods display here  */}
         {isLoading && <p>Loading...</p>}
         {isError && (
-          <p className='my-10 animate-pulse text-red-500'>Something went wrong getting menu</p>
+          <p className='my-10 animate-pulse text-red-500'>Something went wrong getting foods</p>
         )}
+        {!isError &&
+          !isLoading &&
+          Array.isArray(FoodsDisplayData) &&
+          FoodsDisplayData.length === 0 && (
+            <p className='text-black-500 my-10 animate-pulse'>No foods</p>
+          )}
         {!isError && !isLoading && Array.isArray(FoodsDisplayData) && (
           <div className='my-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {FoodsDisplayData.map((foodItem: FoodsDisplayTypes) => (
