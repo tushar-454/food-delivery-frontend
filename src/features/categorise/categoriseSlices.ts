@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAdminCategories, getCategorise } from '../../api/categoriseSlices';
+import { getAdminCategories, getCategorise } from '../../api/categorise';
 import { CategoriseSlicesState } from '../../types/categoriseSlicesTypes';
 
 const initialState: CategoriseSlicesState = {

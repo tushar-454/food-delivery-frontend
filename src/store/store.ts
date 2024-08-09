@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducers from '../features/auth/authSlices';
+import cartReducers from '../features/cart/cartSlices';
 import categoriseReducers from '../features/categorise/categoriseSlices';
 import foodReducers from '../features/food/foodSlices';
 import publicStatesReducers from '../features/publicState/publicStateSlices';
@@ -10,6 +11,7 @@ const store = configureStore({
     auth: authReducers,
     categorise: categoriseReducers,
     food: foodReducers,
+    cart: cartReducers,
   },
 });
 

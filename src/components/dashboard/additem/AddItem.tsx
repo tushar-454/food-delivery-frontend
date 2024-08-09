@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdminCategories } from '../../../api/categoriseSlices';
+import { getAdminCategories } from '../../../api/categorise';
 import { createFood } from '../../../api/food';
 import assets from '../../../assets/assets';
 import { AppDispatch, RootState } from '../../../store/store';
