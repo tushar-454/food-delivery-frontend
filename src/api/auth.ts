@@ -70,3 +70,17 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     throw new Error();
   }
 });
+
+export const updateProfile = createAsyncThunk('auth/updateProfile', async ({ id, data }) => {
+  try {
+    const res = await axios.put(`/user/${id}`, data);
+    if (res.status === 200) {
+      return {
+        user: res.data,
+        status: res.status,
+      };
+    }
+  } catch (error) {
+    throw new Error();
+  }
+});

@@ -3,6 +3,13 @@ export type User = {
   role: string;
   name: string;
   email: string;
+  address: {
+    street: string;
+    city: string;
+    country: string;
+    zip: string;
+    place: string;
+  };
 };
 
 export type initialStateType = {
