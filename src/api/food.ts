@@ -10,3 +10,12 @@ export const createFood = createAsyncThunk('food/createFood', async (food: creat
     throw new Error();
   }
 });
+
+export const getFoods = createAsyncThunk('food/getFoods', async () => {
+  try {
+    const res = await axios.get('/user/foods');
+    return res.data;
+  } catch (error) {
+    throw new Error();
+  }
+});
