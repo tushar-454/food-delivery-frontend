@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategorise } from '../../features/auth/categoriseSlices';
+import { getCategorise } from '../../api/categoriseSlices';
 import { AppDispatch, RootState } from '../../store/store';
 import { CategoryItemType } from '../../types/categoriseSlicesTypes';
 import Container from '../shared/Container';

@@ -11,6 +11,12 @@ body {
   font-family: 'Outfit', sans-serif !important;
 }
 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @layer components {
   .activeNav {
     @apply text-neutral-900 underline underline-offset-4;

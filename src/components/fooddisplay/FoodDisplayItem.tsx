@@ -3,7 +3,7 @@ import { FoodItemProps } from '../../types/FoodsDisplayTypes';
 import Rating from '../../utils/Rating';
 
 const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
-  const { desc, image, name, price, rating } = foodItem;
+  const { description, image, name, price, rating } = foodItem;
   const [isAdded, setIsAdded] = useState(false);
   return (
     <div className='rounded-lg shadow-lg'>
@@ -11,7 +11,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
         <img
           src={image}
           alt={name}
-          className='w-full rounded-t-lg transition-all hover:scale-110'
+          className='h-[300px] w-full rounded-t-lg object-cover transition-all hover:scale-110'
         />
         {/* food item add/remove btn  */}
         {isAdded ? (
@@ -40,7 +40,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
           <span className='text-xl font-bold'>{name}</span>
           <Rating rating={rating} />
         </div>
-        <p className='text-neutral-500'>{desc}</p>
+        <p className='text-neutral-500'>{description}</p>
         <p className='text-2xl font-black text-orange-600'>${price}</p>
       </div>
     </div>
