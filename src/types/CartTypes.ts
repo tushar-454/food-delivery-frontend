@@ -7,6 +7,7 @@ export interface CartTotalProps {
 }
 
 export type CartTypes = {
+  _id: string;
   userId: string;
   image: string;
   name: string;

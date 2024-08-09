@@ -32,35 +32,50 @@ const Cart = () => {
                   <td className='p-2 text-center text-xl font-medium text-neutral-500'>Remove</td>
                 </tr>
               </thead>
-              {!isError && !isLoading && cartData && Array.isArray(cartData) && (
-                <tbody>
-                  {cartData.map((cart: CartTypes) => (
-                    <CartItem key={Math.random()} cart={cart} />
-                  ))}
-                </tbody>
+              {isLoading && <p>Loading...</p>}
+              {isError && (
+                <p className='my-10 animate-pulse text-red-500'>
+                  Something went wrong getting carts
+                </p>
               )}
+              {!isError && !isLoading && cartData && cartData.length === 0 && (
+                <p className='my-10 animate-pulse text-red-500'>No carts found</p>
+              )}
+              {!isError &&
+                !isLoading &&
+                cartData &&
+                Array.isArray(cartData) &&
+                cartData.length > 0 && (
+                  <tbody>
+                    {cartData.map((cart: CartTypes) => (
+                      <CartItem key={cart._id} cart={cart} />
+                    ))}
+                  </tbody>
+                )}
             </table>
           </div>
           {/* cart total and promo code wrapper  */}
-          <div className='mx-auto my-5 flex w-full flex-col justify-center gap-5 sm:my-10 sm:flex-row sm:gap-10 lg:w-[1024px]'>
-            {/* cart total  */}
-            <CartTotal asUse='cart' cart={cartData} />
-            {/* promo code  */}
-            <div className='w-full lg:w-1/2'>
-              <p className='my-4 text-neutral-500'>If you have a promo code. Enter it here</p>
-              <form className='flex'>
-                <input
-                  type='text'
-                  name='promo'
-                  placeholder='promo code'
-                  className='primaryInput pr-8'
-                />
-                <button className='-ml-5 rounded-r-lg bg-neutral-900 px-8 text-white'>
-                  Submit
-                </button>
-              </form>
+          {cartData.length > 0 && (
+            <div className='mx-auto my-5 flex w-full flex-col justify-center gap-5 sm:my-10 sm:flex-row sm:gap-10 lg:w-[1024px]'>
+              {/* cart total  */}
+              <CartTotal asUse='cart' cart={cartData} />
+              {/* promo code  */}
+              <div className='w-full lg:w-1/2'>
+                <p className='my-4 text-neutral-500'>If you have a promo code. Enter it here</p>
+                <form className='flex'>
+                  <input
+                    type='text'
+                    name='promo'
+                    placeholder='promo code'
+                    className='primaryInput pr-8'
+                  />
+                  <button className='-ml-5 rounded-r-lg bg-neutral-900 px-8 text-white'>
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </Container>
     </section>
