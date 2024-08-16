@@ -3,6 +3,7 @@ export type User = {
   role: string;
   name: string;
   email: string;
+  phone: string;
   address: {
     street: string;
     city: string;
