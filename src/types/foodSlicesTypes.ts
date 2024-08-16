@@ -23,3 +23,9 @@ export type initialStateType = {
   isError: boolean;
   food: createFoodItemType | null | FoodsDisplayTypes[];
 };
+
+export type FoodItemWithRating = createFoodItemType & { rating: number };
+
+export interface FoodItemProps {
+  foodItem: FoodItemWithRating;
+}

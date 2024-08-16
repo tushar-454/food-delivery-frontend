@@ -1,44 +1,5 @@
-import assets from '../assets/assets';
 import OrderItem from '../components/myorders/OrderItem';
 import Container from '../components/shared/Container';
-import { MyOrderType } from '../types/MyOrderType';
-
-const myOrdersData: MyOrderType[] = [
-  {
-    orderDate: '2021-09-01',
-    orderNumber: '123456',
-    orderStatus: 'Delivered',
-    orderTotal: 100,
-    orderItems: [
-      {
-        image: assets.salad,
-        name: 'Product 1',
-        price: 20,
-        quantity: 2,
-      },
-      {
-        image: assets.salad,
-        name: 'Product 1',
-        price: 20,
-        quantity: 2,
-      },
-    ],
-  },
-  {
-    orderDate: '2021-09-01',
-    orderNumber: '123456',
-    orderStatus: 'Food Processing',
-    orderTotal: 100,
-    orderItems: [
-      {
-        image: assets.salad,
-        name: 'Product 1',
-        price: 20,
-        quantity: 2,
-      },
-    ],
-  },
-];
 
 const MyOrders = () => {
   return (
@@ -50,8 +11,8 @@ const MyOrders = () => {
           {/* orders here  */}
           <div className='w-full overflow-hidden'>
             <div className='w-full overflow-x-auto'>
-              {myOrdersData.map((order: MyOrderType) => (
-                <OrderItem key={Math.random()} order={order} />
+              {[{}, {}, {}].map(() => (
+                <OrderItem key={Math.random()} />
               ))}
             </div>
           </div>

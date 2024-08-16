@@ -34,11 +34,14 @@ const AddItem = () => {
 
   // image handle change
   const imageHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImage(e.target.files && e.target.files[0]);
-    setState({
-      ...state,
-      image: URL.createObjectURL(e.target.files[0]),
-    });
+    const files = e.target.files;
+    if (files && files[0]) {
+      setImage(files[0]);
+      setState({
+        ...state,
+        image: URL.createObjectURL(files[0]),
+      });
+    }
   };
 
   // handle add food item submit

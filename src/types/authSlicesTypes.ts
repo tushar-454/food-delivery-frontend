@@ -9,6 +9,7 @@ export type User = {
     country: string;
     zip: string;
     place: string;
+    state: string;
   };
 };
 
@@ -25,3 +26,24 @@ export interface LoginResponse {
 export interface SignupResponse {
   status: number;
 }
+
+export type UpdateProfileData = {
+  name: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  place: string;
+};
+
+export type UpdateProfileInitialState = {
+  fName: string;
+  lName: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  place: string;
+};

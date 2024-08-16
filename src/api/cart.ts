@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { initialStateType } from '../types/cartSlicesTypes';
+import { CartTypes } from '../types/cartSlicesTypes';
 import axios from '../utils/axios';
 
-export const addToCart = createAsyncThunk('cart/addToCart', async (cartData: initialStateType) => {
+export const addToCart = createAsyncThunk('cart/addToCart', async (cartData: CartTypes) => {
   const response = await axios.post('/user/cart', cartData);
   return response.data;
 });

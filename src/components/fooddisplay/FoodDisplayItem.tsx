@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteCart, getCarts, updateCart } from '../../api/cart';
 import { AppDispatch, RootState } from '../../store/store';
-import { FoodItemProps } from '../../types/FoodsDisplayTypes';
+import { FoodItemProps } from '../../types/foodSlicesTypes';
 import Rating from '../../utils/Rating';
 
 const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
@@ -20,9 +20,9 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
         userId: user?._id || '',
         image,
         name,
-        price,
+        price: parseFloat(price.toString()),
         quantity: foodQuantity,
-        total: price * foodQuantity,
+        total: parseFloat(price.toString()) * foodQuantity,
       }),
     );
     setCartId(payload._id);

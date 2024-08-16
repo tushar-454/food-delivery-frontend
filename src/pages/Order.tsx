@@ -4,8 +4,9 @@ import { updateProfile } from '../api/auth';
 import CartTotal from '../components/shared/CartTotal';
 import Container from '../components/shared/Container';
 import { AppDispatch, RootState } from '../store/store';
+import { UpdateProfileInitialState } from '../types/authSlicesTypes';
 
-const initialState = {
+const initialState: UpdateProfileInitialState = {
   fName: '',
   lName: '',
   street: '',
@@ -20,27 +21,27 @@ const Order = () => {
   const carts = useSelector((state: RootState) => state.cart.carts);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
-  const [state, setState] = useState({ ...initialState });
+  const [profile, setProfile] = useState({ ...initialState });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setState({ ...state, [name]: value });
-    console.log(state.state);
+    setProfile({ ...profile, [name]: value });
   };
 
   const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { fName, lName, city, country, place, street, zip, state } = profile;
+
     const updateData = {
-      name: `${state.fName} ${state.lName}`,
-      city: state.city,
-      country: state.country,
-      place: state.place,
-      street: state.street,
-      zip: state.zip,
-      state: state.state,
+      name: `${fName} ${lName}`,
+      city: city,
+      country: country,
+      place: place,
+      street: street,
+      zip: zip,
+      state: state,
     };
-    console.log(updateData);
-    await dispatch(updateProfile({ id: user?._id, data: updateData }));
+    if (user) await dispatch(updateProfile({ id: user?._id, data: updateData }));
   };
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const Order = () => {
       const lName = user?.name.split(' ')[1];
       if (user.address) {
         const { city, country, place, street, zip, state } = user.address;
-        return setState({
+        return setProfile({
           ...initialState,
           fName,
           lName,
@@ -61,7 +62,7 @@ const Order = () => {
           state,
         });
       }
-      setState({ ...initialState, fName, lName });
+      setProfile({ ...initialState, fName, lName });
     }
   }, [user]);
 
@@ -81,7 +82,7 @@ const Order = () => {
                   id='fName'
                   placeholder='First name'
                   className='primaryInput'
-                  value={state.fName}
+                  value={profile.fName}
                   onChange={handleInputChange}
                 />
                 <input
@@ -90,7 +91,7 @@ const Order = () => {
                   id='lName'
                   placeholder='Last name'
                   className='primaryInput'
-                  value={state.lName}
+                  value={profile.lName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -109,7 +110,7 @@ const Order = () => {
                 id='street'
                 placeholder='Street'
                 className='primaryInput'
-                value={state.street}
+                value={profile.street}
                 onChange={handleInputChange}
               />
               <div className='flex flex-col gap-4 mmo:flex-row'>
@@ -119,7 +120,7 @@ const Order = () => {
                   id='city'
                   placeholder='city'
                   className='primaryInput'
-                  value={state.city}
+                  value={profile.city}
                   onChange={handleInputChange}
                 />
                 <input
@@ -128,7 +129,7 @@ const Order = () => {
                   id='state'
                   placeholder='state'
                   className='primaryInput'
-                  value={state.state}
+                  value={profile.state}
                   onChange={handleInputChange}
                 />
               </div>
@@ -139,7 +140,7 @@ const Order = () => {
                   id='zip'
                   placeholder='zip code'
                   className='primaryInput'
-                  value={state.zip}
+                  value={profile.zip}
                   onChange={handleInputChange}
                 />
                 <input
@@ -148,7 +149,7 @@ const Order = () => {
                   id='country'
                   placeholder='Country'
                   className='primaryInput'
-                  value={state.country}
+                  value={profile.country}
                   onChange={handleInputChange}
                 />
               </div>
@@ -158,7 +159,7 @@ const Order = () => {
                 id='place'
                 placeholder='Place'
                 className='primaryInput'
-                value={state.place}
+                value={profile.place}
                 onChange={handleInputChange}
               />
               <button className='bgBlackBtn'>Update Profile</button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CartTotalProps } from '../../types/CartTypes';
+import { CartTotalProps } from '../../types/cartSlicesTypes';
 
 const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
   const total = cart.reduce((acc, item) => acc + item.total, 0);

@@ -29,7 +29,7 @@ export const getAdminFoods = createAsyncThunk('food/getAdminFoods', async () => 
   }
 });
 
-export const deleteFood = createAsyncThunk('food/deleteFood', async (id) => {
+export const deleteFood = createAsyncThunk('food/deleteFood', async (id: string) => {
   try {
     const res = await axios.delete(`/admin/food/${id}`);
     return res.data;

@@ -1,18 +1,16 @@
-import React from 'react';
 import assets from '../../../assets/assets';
-import { OrderItemProps, OrderItemType } from '../../../types/MyOrderType';
 
-const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
-  const { orderItems, orderStatus, orderTotal } = order;
+const AdminOrderItem = () => {
+  console.log('admin order page');
   return (
     <div className='mb-5 flex items-start justify-between space-x-6 whitespace-nowrap rounded-lg border border-orange-500 p-4'>
       <div className='flex items-start gap-4'>
         <img src={assets.parcel} alt='parcel icon' />
         <div className='flex flex-col gap-2'>
           <div className='flex gap-2'>
-            {orderItems.map((item: OrderItemType) => (
+            {[{}, {}].map(() => (
               <span key={Math.random()} className='font-medium'>
-                {item.name} - {item.quantity}*{item.price},{' '}
+                {'item.name'} - {'item.quantity'}*{'item.price'},{' '}
               </span>
             ))}
           </div>
@@ -24,9 +22,9 @@ const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
           </div>
         </div>
       </div>
-      <div>Items: {orderItems.length}</div>
-      <div>${orderTotal}</div>
-      <select className='bgDangerBtn text-left outline-none' defaultValue={orderStatus}>
+      <div>Items: {'orderItems.length'}</div>
+      <div>${'orderTotal'}</div>
+      <select className='bgDangerBtn text-left outline-none' defaultValue={'orderStatus'}>
         <option value='pending'>Pending</option>
         <option value='processing'>Food Processing</option>
         <option value='ofd'>Out for delivery</option>

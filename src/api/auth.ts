@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { UpdateProfileData } from '../types/authSlicesTypes';
 import axios from '../utils/axios';
 
 export const loginUser = createAsyncThunk(
@@ -71,16 +72,19 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-export const updateProfile = createAsyncThunk('auth/updateProfile', async ({ id, data }) => {
-  try {
-    const res = await axios.put(`/user/${id}`, data);
-    if (res.status === 200) {
-      return {
-        user: res.data,
-        status: res.status,
-      };
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async ({ id, data }: { id: string; data: UpdateProfileData }) => {
+    try {
+      const res = await axios.put(`/user/${id}`, data);
+      if (res.status === 200) {
+        return {
+          user: res.data,
+          status: res.status,
+        };
+      }
+    } catch (error) {
+      throw new Error();
     }
-  } catch (error) {
-    throw new Error();
-  }
-});
+  },
+);

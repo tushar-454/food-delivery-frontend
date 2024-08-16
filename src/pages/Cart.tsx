@@ -5,14 +5,14 @@ import CartItem from '../components/cart/CartItem';
 import CartTotal from '../components/shared/CartTotal';
 import Container from '../components/shared/Container';
 import { AppDispatch, RootState } from '../store/store';
-import { CartTypes } from '../types/CartTypes';
+import { CartTypes } from '../types/cartSlicesTypes';
 
 const Cart = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const { isLoading, isError, carts: cartData } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(getCarts(user._id || ''));
+    if (user) dispatch(getCarts(user._id || ''));
   }, [dispatch, user]);
   return (
     <section>
