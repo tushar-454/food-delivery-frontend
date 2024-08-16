@@ -47,4 +47,5 @@ export type UpdateProfileInitialState = {
   zip: string;
   country: string;
   place: string;
+  phone: string;
 };

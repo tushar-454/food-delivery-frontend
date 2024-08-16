@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../api/auth';
 import CartTotal from '../components/shared/CartTotal';
@@ -15,6 +16,7 @@ const initialState: UpdateProfileInitialState = {
   zip: '',
   country: '',
   place: '',
+  phone: '',
 };
 
 const Order = () => {
@@ -30,8 +32,11 @@ const Order = () => {
 
   const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { fName, lName, city, country, place, street, zip, state } = profile;
-
+    const { fName, lName, city, country, place, street, zip, state, phone } = profile;
+    if (!fName || !lName || !city || !country || !place || !street || !zip || !state || !phone) {
+      toast.error('All fields are required');
+      return;
+    }
     const updateData = {
       name: `${fName} ${lName}`,
       city: city,
@@ -40,6 +45,7 @@ const Order = () => {
       street: street,
       zip: zip,
       state: state,
+      phone: phone,
     };
     if (user) await dispatch(updateProfile({ id: user?._id, data: updateData }));
   };
@@ -60,6 +66,7 @@ const Order = () => {
           street,
           zip,
           state,
+          phone: user.phone,
         });
       }
       setProfile({ ...initialState, fName, lName });
@@ -160,6 +167,15 @@ const Order = () => {
                 placeholder='Place'
                 className='primaryInput'
                 value={profile.place}
+                onChange={handleInputChange}
+              />
+              <input
+                type='tel'
+                name='phone'
+                id='phone'
+                placeholder='phone'
+                className='primaryInput'
+                value={profile.phone}
                 onChange={handleInputChange}
               />
               <button className='bgBlackBtn'>Update Profile</button>

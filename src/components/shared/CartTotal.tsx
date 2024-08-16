@@ -1,9 +1,40 @@
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteCart } from '../../api/cart';
+import { AppDispatch } from '../../store/store';
 import { CartTotalProps } from '../../types/cartSlicesTypes';
+import axios from '../../utils/axios';
 
 const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const total = cart.reduce((acc, item) => acc + item.total, 0);
+
+  // handle order creation
+  const handleOrder = async () => {
+    try {
+      const order = {
+        userId: cart[0].userId,
+        foodsItems: cart.map((crt) => ({
+          foodId: crt._id,
+          quantity: crt.quantity,
+        })),
+      };
+      const res = await axios.post('/user/order', order);
+      if (res.status === 201) {
+        toast.success('Order placed successfully');
+        cart.forEach(async (crt) => {
+          if (crt && typeof crt._id === 'string') {
+            await dispatch(deleteCart(crt._id));
+          }
+        });
+      }
+    } catch (error) {
+      toast.error('Something went wrong while placing order');
+    }
+  };
+
   return (
     <div className='w-full lg:w-1/2'>
       <h2 className='text-2xl font-semibold'>Cart Total</h2>
@@ -23,10 +54,14 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
       </div>
       {asUse === 'cart' && (
         <Link to='/order' className='bgOrangeBtn mt-5 inline-block'>
-          Proceed to Checkout
+          Proceed to Order
         </Link>
       )}
-      {asUse === 'order' && <button className='bgOrangeBtn mt-5'>Proceed to Payment</button>}
+      {asUse === 'order' && (
+        <button onClick={handleOrder} className='bgOrangeBtn mt-5'>
+          Place Order
+        </button>
+      )}
     </div>
   );
 };
