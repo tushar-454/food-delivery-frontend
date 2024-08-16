@@ -27,5 +27,5 @@ export type initialStateType = {
 export type FoodItemWithRating = createFoodItemType & { rating: number };
 
 export interface FoodItemProps {
-  foodItem: FoodItemWithRating;
+  foodItem: FoodsDisplayTypes;
 }

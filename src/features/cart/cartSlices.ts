@@ -5,7 +5,7 @@ import { CartSliceinitialStateType } from '../../types/cartSlicesTypes';
 const initialState: CartSliceinitialStateType = {
   isLoading: false,
   isError: false,
-  cart: { userId: '', image: '', name: '', price: 0, quantity: 0, total: 0 },
+  cart: { userId: '', foodId: '', image: '', name: '', price: 0, quantity: 0, total: 0 },
   carts: [],
 };
 
@@ -44,7 +44,15 @@ const cartSlices = createSlice({
       .addCase(deleteCart.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
-        state.cart = { userId: '', image: '', name: '', price: 0, quantity: 0, total: 0 };
+        state.cart = {
+          userId: '',
+          foodId: '',
+          image: '',
+          name: '',
+          price: 0,
+          quantity: 0,
+          total: 0,
+        };
       })
       .addCase(getCarts.pending, (state) => {
         state.isLoading = true;

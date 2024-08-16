@@ -17,7 +17,7 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
       const order = {
         userId: cart[0].userId,
         foodsItems: cart.map((crt) => ({
-          foodId: crt._id,
+          foodId: crt.foodId,
           quantity: crt.quantity,
         })),
       };

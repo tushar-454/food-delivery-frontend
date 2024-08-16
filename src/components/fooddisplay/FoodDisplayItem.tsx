@@ -6,7 +6,7 @@ import { FoodItemProps } from '../../types/foodSlicesTypes';
 import Rating from '../../utils/Rating';
 
 const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
-  const { description, image, name, price, rating } = foodItem;
+  const { _id, description, image, name, price, rating } = foodItem;
   const user = useSelector((state: RootState) => state.auth.user);
   const [isAdded, setIsAdded] = useState(false);
   const [foodQuantity, setFoodQuantity] = useState(1);
@@ -18,6 +18,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
     const { payload } = await dispatch(
       addToCart({
         userId: user?._id || '',
+        foodId: _id,
         image,
         name,
         price: parseFloat(price.toString()),

@@ -7,11 +7,11 @@ import assets from '../../../assets/assets';
 import { AppDispatch, RootState } from '../../../store/store';
 import { CategoryItemType } from '../../../types/categoriseSlicesTypes';
 import { createFoodItemType } from '../../../types/foodSlicesTypes';
+import Rating from '../../../utils/Rating';
 import { uploadImage } from '../../../utils/uploadImg';
-import FoodDisplayItem from '../../fooddisplay/FoodDisplayItem';
 
 const initialState: createFoodItemType = {
-  image: 'https://via.placeholder.com/640x400',
+  image: '',
   name: '',
   description: '',
   category: '',
@@ -23,6 +23,7 @@ const AddItem = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [state, setState] = useState({ ...initialState });
   const [image, setImage] = useState<File | null>(null);
+  const [isLPVisible, setIsLPVisible] = useState(false);
 
   // food item add handle change
   const handleChange = (
@@ -30,6 +31,7 @@ const AddItem = () => {
   ) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
+    if (!isLPVisible) setIsLPVisible(true);
   };
 
   // image handle change
@@ -149,10 +151,29 @@ const AddItem = () => {
           Add
         </button>
       </form>
-      <div className='w-full p-5 sm:w-[640px]'>
-        <h2 className='mb-8 text-2xl font-semibold'>Live Preview</h2>
-        <FoodDisplayItem foodItem={{ ...state, rating: 0 }} />
-      </div>
+      {/* live preview here  */}
+      {isLPVisible && (
+        <div className='w-full p-5 sm:w-[640px]'>
+          <h2 className='mb-8 text-2xl font-semibold'>Live Preview</h2>
+          <div className='rounded-lg shadow-lg'>
+            <div className='relative overflow-hidden'>
+              <img
+                src={state.image || 'https://via.placeholder.com/640x400'}
+                alt={state.name}
+                className='h-[300px] w-full rounded-t-lg object-cover transition-all hover:scale-110'
+              />
+            </div>
+            <div className='space-y-2 px-3 py-5'>
+              <div className='flex justify-between gap-4'>
+                <span className='text-xl font-bold'>{state.name}</span>
+                <Rating rating={0} />
+              </div>
+              <p className='text-neutral-500'>{state.description}</p>
+              <p className='text-2xl font-black text-orange-600'>${state.price}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
