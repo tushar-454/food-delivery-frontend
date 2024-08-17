@@ -1,9 +1,24 @@
+import toast from 'react-hot-toast';
 import assets from '../../../assets/assets';
 import { User } from '../../../types/authSlicesTypes';
 import { OrderItemProps, OrderItemType } from '../../../types/orderSlicesTypes';
+import axios from '../../../utils/axios';
 
 const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
   const { userId, orderItems, total, status } = order;
+
+  // handle user orders update
+  const handleAdminOrdersUpdate = async (e: React.ChangeEvent<HTMLSelectElement>, id: string) => {
+    try {
+      const res = await axios.put(`/admin/order/${id}`, { status: e.target.value });
+      if (res.status === 200) {
+        toast.success('Order status updated successfully');
+      }
+    } catch (error) {
+      toast.error('Failed to update order status');
+    }
+  };
+
   const isUserObject = (user: string | User): user is User => {
     return typeof user !== 'string';
   };
@@ -42,11 +57,18 @@ const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
       </div>
       <div className='min-w-16'>Items: {orderItems.length}</div>
       <div>${total}</div>
-      <select className='bgDangerBtn text-left outline-none' defaultValue={status}>
+      <select
+        name='status'
+        id='status'
+        className='bgDangerBtn text-left outline-none'
+        defaultValue={status}
+        onChange={(e) => handleAdminOrdersUpdate(e, order._id)}
+      >
         <option value='pending'>Pending</option>
         <option value='processing'>Food Processing</option>
         <option value='ofd'>Out for delivery</option>
         <option value='delivered'>Delivered</option>
+        <option value='canceled'>Canceled</option>
       </select>
     </div>
   );
