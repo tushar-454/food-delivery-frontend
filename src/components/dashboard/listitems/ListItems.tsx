@@ -14,7 +14,7 @@ const ListItems = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className='overflow-x-scroll'>
       <h2 className='text-xl font-semibold'>All Foods List</h2>
       {isError && (
         <p className='my-10 animate-pulse text-red-500'>Something went wrong getting food lists</p>
@@ -25,11 +25,11 @@ const ListItems = () => {
       {/* orders here  */}
       <div className='my-10 w-full overflow-x-auto'>
         {!isError && !isLoading && Array.isArray(foodLists) && foodLists.length > 0 && (
-          <table className='w-full overflow-x-scroll'>
+          <table className='min-w-[768px] lg:w-full'>
             <thead>
               <tr className='bg-neutral-200'>
                 <td className='min-w-12 p-4 font-bold'>Image</td>
-                <td className='min-w-[320px] p-4 font-bold'>Name</td>
+                <td className='p-4 font-bold'>Name</td>
                 <td className='whitespace-nowrap p-4 font-bold'>Category</td>
                 <td className='p-4 font-bold'>Price</td>
                 <td className='p-4 font-bold'>Action</td>

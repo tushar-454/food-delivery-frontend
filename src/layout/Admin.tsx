@@ -16,7 +16,7 @@ const Admin = () => {
       <AdminHeader />
       <div className='flex'>
         <AdminSidebar />
-        <div className='h-screen w-screen flex-grow bg-neutral-100 p-10'>
+        <div className='h-screen w-screen flex-grow overflow-x-auto bg-neutral-100 p-4 lg:p-10'>
           <Outlet />
         </div>
       </div>

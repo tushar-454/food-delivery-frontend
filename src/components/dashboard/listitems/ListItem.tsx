@@ -19,7 +19,7 @@ const ListItem: React.FC<FoodListProps> = ({ foodList }) => {
       <td className='min-w-12 border-y border-l p-4'>
         <img src={image} alt={name} className='w-12' />
       </td>
-      <td className='min-w-[320px] border-y p-4'>{name}</td>
+      <td className='border-y p-4'>{name}</td>
       <td className='whitespace-nowrap border-y p-4'>{category}</td>
       <td className='border-y p-4'>${price}</td>
       <td className='cursor-pointer border-y border-r p-4' onClick={() => handleDelete(_id)}>

@@ -22,7 +22,7 @@ const AdminHeader = () => {
   };
   return (
     <header className='border-b-2'>
-      <div className='px-10'>
+      <div className='px-4 lg:px-10'>
         {/* header wrapper component  */}
         <div className='flex items-center justify-between py-4'>
           {/* header component logo  */}
