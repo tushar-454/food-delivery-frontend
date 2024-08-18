@@ -40,22 +40,22 @@ const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
             ))}
           </div>
           <div className='flex flex-col gap-1'>
-            <span className='font-medium'>{isUserObject(userId) && userId.name}</span>
+            <span className='font-medium'>{isUserObject(userId) && userId?.name}</span>
             <span>
               {isUserObject(userId) &&
-                `${userId.address.country}, ${userId.address.state}, ${userId.address.city}`}
+                `${userId?.address?.country}, ${userId?.address?.state}, ${userId?.address?.city}`}
             </span>
             <span>
               {isUserObject(userId) &&
-                `${userId.address.place}, ${userId.address.state}, ${userId.address.zip}`}
+                `${userId?.address?.place}, ${userId?.address?.state}, ${userId?.address?.zip}`}
             </span>
-            <a href={`tel:${isUserObject(userId) && userId.phone}`} className='mt-2'>
-              {isUserObject(userId) && userId.phone}
+            <a href={`tel:${isUserObject(userId) && userId?.phone}`} className='mt-2'>
+              {isUserObject(userId) && userId?.phone}
             </a>
           </div>
         </div>
       </div>
-      <div className='min-w-16'>Items: {orderItems.length}</div>
+      <div className='min-w-16'>Items: {orderItems?.length}</div>
       <div>${total}</div>
       <select
         name='status'
