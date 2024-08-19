@@ -12,7 +12,11 @@ const initialState: CartSliceinitialStateType = {
 const cartSlices = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteCartLocal: (state, { payload }) => {
+      state.carts = state.carts.filter((cart) => cart._id !== payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addToCart.pending, (state) => {
@@ -70,4 +74,5 @@ const cartSlices = createSlice({
   },
 });
 
+export const { deleteCartLocal } = cartSlices.actions;
 export default cartSlices.reducer;

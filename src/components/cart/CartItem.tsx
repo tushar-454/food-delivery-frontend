@@ -1,15 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { deleteCart, getCarts } from '../../api/cart';
+import { deleteCart } from '../../api/cart';
+import { deleteCartLocal } from '../../features/cart/cartSlices';
 import { AppDispatch } from '../../store/store';
 import { CartItemProps } from '../../types/cartSlicesTypes';
 
 const CartItem: React.FC<CartItemProps> = ({ cart }) => {
-  const { _id, userId, image, name, price, quantity, total } = cart;
+  const { _id, image, name, price, quantity, total } = cart;
   const dispatch = useDispatch<AppDispatch>();
 
   const handleDeleteCart = async () => {
     if (_id) await dispatch(deleteCart(_id));
-    await dispatch(getCarts(userId));
+    dispatch(deleteCartLocal(_id));
   };
 
   return (
