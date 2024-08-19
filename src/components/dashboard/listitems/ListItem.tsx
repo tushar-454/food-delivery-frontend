@@ -1,6 +1,7 @@
 import { MdDeleteForever, MdModeEditOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { deleteFood, getAdminFoods } from '../../../api/food';
+import { deleteFood } from '../../../api/food';
+import { deleteFoodLocal } from '../../../features/food/foodSlices';
 import { AppDispatch } from '../../../store/store';
 import { FoodListProps } from '../../../types/FoodListsTypes';
 
@@ -11,8 +12,7 @@ const ListItem: React.FC<FoodListProps> = ({ foodList }) => {
   // handle food delete
   const handleDelete = async (id: string) => {
     await dispatch(deleteFood(id));
-    await dispatch(getAdminFoods());
-    return null;
+    dispatch(deleteFoodLocal(id));
   };
 
   return (

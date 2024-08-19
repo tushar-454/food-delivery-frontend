@@ -11,7 +11,13 @@ const initialState: initialStateType = {
 const foodSlices = createSlice({
   name: 'food',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteFoodLocal: (state, { payload }) => {
+      if (Array.isArray(state.food)) {
+        state.food = state.food?.filter((item) => item._id !== payload);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createFood.pending, (state) => {
@@ -62,15 +68,9 @@ const foodSlices = createSlice({
         state.food = null;
       });
     builder
-      .addCase(deleteFood.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-        state.food = null;
-      })
-      .addCase(deleteFood.fulfilled, (state, action) => {
+      .addCase(deleteFood.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
-        state.food = action.payload;
       })
       .addCase(deleteFood.rejected, (state) => {
         state.isLoading = false;
@@ -80,4 +80,5 @@ const foodSlices = createSlice({
   },
 });
 
+export const { deleteFoodLocal } = foodSlices.actions;
 export default foodSlices.reducer;
