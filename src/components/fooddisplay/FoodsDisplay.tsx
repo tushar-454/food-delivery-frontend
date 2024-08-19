@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { getFoods } from '../../api/food';
 import { AppDispatch, RootState } from '../../store/store';
 import { FoodsDisplayTypes } from '../../types/foodSlicesTypes';
@@ -12,10 +13,13 @@ const FoodsDisplay = () => {
     isLoading,
     food: FoodsDisplayData,
   } = useSelector((state: RootState) => state.food);
+  const { search } = useLocation();
   const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    dispatch(getFoods());
-  }, [dispatch]);
+    if (search) dispatch(getFoods(search.split('=')[1]));
+    else dispatch(getFoods(''));
+  }, [dispatch, search]);
   return (
     <section>
       <Container>

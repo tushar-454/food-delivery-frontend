@@ -1,3 +1,4 @@
+import { MdDeleteForever, MdModeEditOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { deleteFood, getAdminFoods } from '../../../api/food';
 import { AppDispatch } from '../../../store/store';
@@ -22,8 +23,11 @@ const ListItem: React.FC<FoodListProps> = ({ foodList }) => {
       <td className='border-y p-4'>{name}</td>
       <td className='whitespace-nowrap border-y p-4'>{category}</td>
       <td className='border-y p-4'>${price}</td>
-      <td className='cursor-pointer border-y border-r p-4' onClick={() => handleDelete(_id)}>
-        X
+      <td className='cursor-pointer border-y border-r p-4'>
+        <span className='flex gap-4'>
+          <MdDeleteForever className='text-2xl' onClick={() => handleDelete(_id)} />
+          <MdModeEditOutline className='text-2xl' />
+        </span>
       </td>
     </tr>
   );
