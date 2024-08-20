@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { deleteCart } from '../../api/cart';
 import { deleteCartLocal } from '../../features/cart/cartSlices';
@@ -9,8 +10,15 @@ const CartItem: React.FC<CartItemProps> = ({ cart }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleDeleteCart = async () => {
-    if (_id) await dispatch(deleteCart(_id));
-    dispatch(deleteCartLocal(_id));
+    if (_id) {
+      const { payload } = await dispatch(deleteCart(_id));
+      if (payload.status === 200) {
+        dispatch(deleteCartLocal(_id));
+        toast.success('Item removed from cart');
+      } else {
+        toast.error('Something went wrong removing item from cart');
+      }
+    }
   };
 
   return (

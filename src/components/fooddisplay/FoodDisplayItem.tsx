@@ -28,8 +28,16 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
           total: parseFloat(price.toString()) * foodQuantity,
         }),
       );
-      setCartId(payload._id);
-      await dispatch(getCarts(user?._id || ''));
+      if (payload.status === 401) {
+        toast.error('Please login to add to cart');
+        setIsAdded(false);
+        return;
+      }
+      if (payload.status === 201) {
+        toast.success('Added to cart');
+        if (payload && payload._id) setCartId(payload._id);
+        await dispatch(getCarts(user?._id || ''));
+      }
     } catch (error) {
       toast.error('Something went wrong adding to cart');
     }
