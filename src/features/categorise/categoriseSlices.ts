@@ -22,7 +22,7 @@ const categoriseSlices = createSlice({
       .addCase(getCategorise.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isError = false;
-        state.categorise = payload;
+        state.categorise = payload.categories;
       })
       .addCase(getCategorise.rejected, (state) => {
         state.isLoading = false;
@@ -38,7 +38,7 @@ const categoriseSlices = createSlice({
       .addCase(getAdminCategories.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isError = false;
-        state.categorise = payload;
+        state.categorise = payload.categories;
       })
       .addCase(getAdminCategories.rejected, (state) => {
         state.isLoading = false;

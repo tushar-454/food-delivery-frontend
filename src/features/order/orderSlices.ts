@@ -21,7 +21,7 @@ const orderSlices = createSlice({
       .addCase(fetchOrders.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isError = false;
-        state.orders = payload;
+        state.orders = payload.orders;
       })
       .addCase(fetchOrders.rejected, (state) => {
         state.isLoading = false;
@@ -35,7 +35,7 @@ const orderSlices = createSlice({
       .addCase(fetchOrdersAdmin.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isError = false;
-        state.orders = payload;
+        state.orders = payload.orders;
       })
       .addCase(fetchOrdersAdmin.rejected, (state) => {
         state.isLoading = false;

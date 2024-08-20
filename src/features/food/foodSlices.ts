@@ -44,7 +44,7 @@ const foodSlices = createSlice({
       .addCase(getFoods.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.food = action.payload;
+        state.food = action.payload.foods;
       })
       .addCase(getFoods.rejected, (state) => {
         state.isLoading = false;
@@ -60,7 +60,7 @@ const foodSlices = createSlice({
       .addCase(getAdminFoods.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.food = action.payload;
+        state.food = action.payload.foods;
       })
       .addCase(getAdminFoods.rejected, (state) => {
         state.isLoading = false;
