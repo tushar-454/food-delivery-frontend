@@ -79,8 +79,8 @@ export const updateProfile = createAsyncThunk(
       const res = await axios.put(`/user/${id}`, data);
       if (res.status === 200) {
         return {
-          user: res.data,
-          status: res.status,
+          user: res.data.user,
+          status: res.data.status,
         };
       }
     } catch (error) {

@@ -2,7 +2,8 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteCart } from '../../api/cart';
+import { deleteCarts } from '../../api/cart';
+import { deleteCartLocalAll } from '../../features/cart/cartSlices';
 import { AppDispatch } from '../../store/store';
 import { CartTotalProps } from '../../types/cartSlicesTypes';
 import axios from '../../utils/axios';
@@ -24,11 +25,9 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
       const res = await axios.post('/user/order', order);
       if (res.status === 201) {
         toast.success('Order placed successfully');
-        cart.forEach(async (crt) => {
-          if (crt && typeof crt._id === 'string') {
-            await dispatch(deleteCart(crt._id));
-          }
-        });
+        dispatch(deleteCartLocalAll());
+        const cartIds = cart.map((crt) => crt._id);
+        await dispatch(deleteCarts(cartIds.join(',')));
       }
     } catch (error) {
       toast.error('Something went wrong while placing order');

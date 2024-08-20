@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteCart, getCarts, updateCart } from '../../api/cart';
 import { AppDispatch, RootState } from '../../store/store';
@@ -14,35 +15,43 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleFirstAddToCart = async () => {
-    setIsAdded(true);
-    const { payload } = await dispatch(
-      addToCart({
-        userId: user?._id || '',
-        foodId: _id,
-        image,
-        name,
-        price: parseFloat(price.toString()),
-        quantity: foodQuantity,
-        total: parseFloat(price.toString()) * foodQuantity,
-      }),
-    );
-    setCartId(payload._id);
-    await dispatch(getCarts(user?._id || ''));
+    try {
+      setIsAdded(true);
+      const { payload } = await dispatch(
+        addToCart({
+          userId: user?._id || '',
+          foodId: _id,
+          image,
+          name,
+          price: parseFloat(price.toString()),
+          quantity: foodQuantity,
+          total: parseFloat(price.toString()) * foodQuantity,
+        }),
+      );
+      setCartId(payload._id);
+      await dispatch(getCarts(user?._id || ''));
+    } catch (error) {
+      toast.error('Something went wrong adding to cart');
+    }
   };
 
   const handleAddFood = async (action: string) => {
-    if (action === 'add') {
-      setFoodQuantity(foodQuantity + 1);
-      await dispatch(updateCart({ id: cartId, quantity: foodQuantity + 1 }));
-    } else {
-      if (foodQuantity > 1) {
-        setFoodQuantity(foodQuantity - 1);
-        await dispatch(updateCart({ id: cartId, quantity: foodQuantity - 1 }));
+    try {
+      if (action === 'add') {
+        setFoodQuantity(foodQuantity + 1);
+        await dispatch(updateCart({ id: cartId, quantity: foodQuantity + 1 }));
       } else {
-        setIsAdded(false);
-        await dispatch(deleteCart(cartId));
-        await dispatch(getCarts(user?._id || ''));
+        if (foodQuantity > 1) {
+          setFoodQuantity(foodQuantity - 1);
+          await dispatch(updateCart({ id: cartId, quantity: foodQuantity - 1 }));
+        } else {
+          setIsAdded(false);
+          await dispatch(deleteCart(cartId));
+          await dispatch(getCarts(user?._id || ''));
+        }
       }
+    } catch (error) {
+      toast.error('Something went wrong updating cart');
     }
   };
 

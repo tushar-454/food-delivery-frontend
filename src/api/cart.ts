@@ -20,6 +20,11 @@ export const deleteCart = createAsyncThunk('cart/deleteCart', async (id: string)
   return response.data;
 });
 
+export const deleteCarts = createAsyncThunk('cart/deleteCarts', async (ids: string) => {
+  const response = await axios.delete(`/user/carts?ids=${ids}`);
+  return response.data;
+});
+
 export const getCarts = createAsyncThunk('cart/getCarts', async (userId: string) => {
   const response = await axios.get(`/user/carts/${userId}`);
   return response.data;

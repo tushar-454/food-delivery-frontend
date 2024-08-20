@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToCart, deleteCart, getCarts, updateCart } from '../../api/cart';
+import { addToCart, deleteCart, deleteCarts, getCarts, updateCart } from '../../api/cart';
 import { CartSliceinitialStateType } from '../../types/cartSlicesTypes';
 
 const initialState: CartSliceinitialStateType = {
@@ -15,6 +15,9 @@ const cartSlices = createSlice({
   reducers: {
     deleteCartLocal: (state, { payload }) => {
       state.carts = state.carts.filter((cart) => cart._id !== payload);
+    },
+    deleteCartLocalAll: (state) => {
+      state.carts = [];
     },
   },
   extraReducers: (builder) => {
@@ -58,6 +61,19 @@ const cartSlices = createSlice({
           total: 0,
         };
       })
+      .addCase(deleteCarts.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.cart = {
+          userId: '',
+          foodId: '',
+          image: '',
+          name: '',
+          price: 0,
+          quantity: 0,
+          total: 0,
+        };
+      })
       .addCase(getCarts.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -74,5 +90,5 @@ const cartSlices = createSlice({
   },
 });
 
-export const { deleteCartLocal } = cartSlices.actions;
+export const { deleteCartLocal, deleteCartLocalAll } = cartSlices.actions;
 export default cartSlices.reducer;

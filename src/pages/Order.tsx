@@ -21,7 +21,7 @@ const initialState: UpdateProfileInitialState = {
 
 const Order = () => {
   const carts = useSelector((state: RootState) => state.cart.carts);
-  const user = useSelector((state: RootState) => state.auth.user);
+  const { user, isLoading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
   const [profile, setProfile] = useState({ ...initialState });
 
@@ -51,10 +51,10 @@ const Order = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && !isLoading) {
       const fName = user?.name.split(' ')[0];
       const lName = user?.name.split(' ')[1];
-      if (user.address) {
+      if (user.address && user.phone) {
         const { city, country, place, street, zip, state } = user.address;
         return setProfile({
           ...initialState,
@@ -71,7 +71,7 @@ const Order = () => {
       }
       setProfile({ ...initialState, fName, lName });
     }
-  }, [user]);
+  }, [user, isLoading]);
 
   return (
     <section>
