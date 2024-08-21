@@ -35,7 +35,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
       }
       if (payload.status === 201) {
         toast.success('Added to cart');
-        if (payload && payload._id) setCartId(payload._id);
+        if (payload && payload.cart) setCartId(payload.cart._id);
         await dispatch(getCarts(user?._id || ''));
       }
     } catch (error) {

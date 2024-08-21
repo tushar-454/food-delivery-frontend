@@ -8,12 +8,15 @@ import { AppDispatch } from '../../store/store';
 import { CartTotalProps } from '../../types/cartSlicesTypes';
 import axios from '../../utils/axios';
 
-const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart }) => {
+const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const total = cart.reduce((acc, item) => acc + item.total, 0);
+  const total = cart?.reduce((acc, item) => acc + item.total, 0);
 
   // handle order creation
   const handleOrder = async () => {
+    if (!isProfileUpdate) {
+      return toast.error('Please update your profile first');
+    }
     try {
       const order = {
         userId: cart[0].userId,

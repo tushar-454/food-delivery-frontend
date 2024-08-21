@@ -38,7 +38,7 @@ const Cart = () => {
                   Something went wrong getting carts
                 </p>
               )}
-              {!isError && !isLoading && cartData && cartData.length === 0 && (
+              {!isError && !isLoading && cartData && cartData?.length === 0 && (
                 <p className='my-10 animate-pulse text-red-500'>No carts found</p>
               )}
               {!isError &&
@@ -55,10 +55,10 @@ const Cart = () => {
             </table>
           </div>
           {/* cart total and promo code wrapper  */}
-          {cartData.length > 0 && (
+          {cartData?.length > 0 && (
             <div className='mx-auto my-5 flex w-full flex-col justify-center gap-5 sm:my-10 sm:flex-row sm:gap-10 lg:w-[1024px]'>
               {/* cart total  */}
-              <CartTotal asUse='cart' cart={cartData} />
+              <CartTotal asUse='cart' cart={cartData} isProfileUpdate={false} />
               {/* promo code  */}
               <div className='w-full lg:w-1/2'>
                 <p className='my-4 text-neutral-500'>If you have a promo code. Enter it here</p>

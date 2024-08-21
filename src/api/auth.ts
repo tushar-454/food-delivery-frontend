@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { isAxiosError } from 'axios';
 import { UpdateProfileData } from '../types/authSlicesTypes';
 import axios from '../utils/axios';
 
@@ -20,7 +21,9 @@ export const loginUser = createAsyncThunk(
         };
       }
     } catch (error) {
-      throw new Error();
+      if (isAxiosError(error)) {
+        return error.response?.data;
+      }
     }
   },
 );
@@ -35,7 +38,9 @@ export const token = createAsyncThunk('auth/token', async () => {
       };
     }
   } catch (error) {
-    throw new Error();
+    if (isAxiosError(error)) {
+      return error.response?.data;
+    }
   }
 });
 
@@ -48,13 +53,11 @@ export const signupUser = createAsyncThunk(
         email,
         password,
       });
-      if (res.status === 201) {
-        return {
-          status: res.status,
-        };
-      }
+      return res.data;
     } catch (error) {
-      throw new Error();
+      if (isAxiosError(error)) {
+        return error.response?.data;
+      }
     }
   },
 );
@@ -62,13 +65,11 @@ export const signupUser = createAsyncThunk(
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     const res = await axios.delete(`/token/delete`);
-    if (res.status === 204) {
-      return {
-        status: res.status,
-      };
-    }
+    return res.data;
   } catch (error) {
-    throw new Error();
+    if (isAxiosError(error)) {
+      return error.response?.data;
+    }
   }
 });
 
@@ -77,14 +78,11 @@ export const updateProfile = createAsyncThunk(
   async ({ id, data }: { id: string; data: UpdateProfileData }) => {
     try {
       const res = await axios.put(`/user/${id}`, data);
-      if (res.status === 200) {
-        return {
-          user: res.data.user,
-          status: res.data.status,
-        };
-      }
+      return res.data;
     } catch (error) {
-      throw new Error();
+      if (isAxiosError(error)) {
+        return error.response?.data;
+      }
     }
   },
 );

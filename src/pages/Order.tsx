@@ -24,34 +24,48 @@ const Order = () => {
   const { user, isLoading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
   const [profile, setProfile] = useState({ ...initialState });
+  const [isProfileUpdate, setIsProfileUpdate] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { fName, lName, city, country, place, street, zip, state, phone } = profile;
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
+    if (fName && lName && city && country && place && street && zip && state && phone) {
+      setIsProfileUpdate(true);
+    } else {
+      setIsProfileUpdate(false);
+    }
   };
 
-  const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleUpdateProfile = async () => {
     const { fName, lName, city, country, place, street, zip, state, phone } = profile;
-    if (!fName || !lName || !city || !country || !place || !street || !zip || !state || !phone) {
-      toast.error('All fields are required');
-      return;
+    try {
+      const updateData = {
+        name: `${fName} ${lName}`,
+        city: city,
+        country: country,
+        place: place,
+        street: street,
+        zip: zip,
+        state: state,
+        phone: phone,
+      };
+      if (user) {
+        const { payload } = await dispatch(updateProfile({ id: user?._id, data: updateData }));
+        if (payload.status === 200) {
+          toast.success('Profile updated successfully');
+        }
+        if (payload.status === 400) {
+          toast.error(payload.error);
+        }
+      }
+    } catch (error) {
+      toast.error('Something went wrong');
     }
-    const updateData = {
-      name: `${fName} ${lName}`,
-      city: city,
-      country: country,
-      place: place,
-      street: street,
-      zip: zip,
-      state: state,
-      phone: phone,
-    };
-    if (user) await dispatch(updateProfile({ id: user?._id, data: updateData }));
   };
 
   useEffect(() => {
-    if (user && !isLoading) {
+    if (!isLoading && user) {
       const fName = user?.name.split(' ')[0];
       const lName = user?.name.split(' ')[1];
       if (user.address && user.phone) {
@@ -91,6 +105,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.fName}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -100,6 +115,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.lName}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
               </div>
               <input
@@ -119,6 +135,7 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.street}
                 onChange={handleInputChange}
+                onBlur={handleUpdateProfile}
               />
               <div className='flex flex-col gap-4 mmo:flex-row'>
                 <input
@@ -129,6 +146,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.city}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -138,6 +156,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.state}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
               </div>
               <div className='flex flex-col gap-4 mmo:flex-row'>
@@ -149,6 +168,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.zip}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -158,6 +178,7 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.country}
                   onChange={handleInputChange}
+                  onBlur={handleUpdateProfile}
                 />
               </div>
               <input
@@ -168,6 +189,7 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.place}
                 onChange={handleInputChange}
+                onBlur={handleUpdateProfile}
               />
               <input
                 type='tel'
@@ -177,12 +199,12 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.phone}
                 onChange={handleInputChange}
+                onBlur={handleUpdateProfile}
               />
-              <button className='bgBlackBtn'>Update Profile</button>
             </form>
           </div>
           {/* cart total  */}
-          <CartTotal asUse='order' cart={carts} />
+          <CartTotal asUse='order' cart={carts} isProfileUpdate={isProfileUpdate} />
         </div>
       </Container>
     </section>

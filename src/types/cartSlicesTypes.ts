@@ -11,6 +11,7 @@ export interface CartItemProps {
 export interface CartTotalProps {
   asUse: string;
   cart: CartTypes[];
+  isProfileUpdate: boolean;
 }
 
 export type CartTypes = {

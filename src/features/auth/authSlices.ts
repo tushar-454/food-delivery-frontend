@@ -49,7 +49,7 @@ const authSlices = createSlice({
       });
     builder
       .addCase(updateProfile.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.isError = false;
       })
       .addCase(updateProfile.fulfilled, (state, { payload }) => {

@@ -5,30 +5,44 @@ import { useDispatch } from 'react-redux';
 import { signupUser } from '../../api/auth';
 import { login, signup } from '../../features/publicState/publicStateSlices';
 import { AppDispatch } from '../../store/store';
-import { SignupResponse } from '../../types/authSlicesTypes';
 
 const Signup = () => {
-  const [state, setState] = useState({ name: '', email: '', password: '' });
+  const [state, setState] = useState({ name: '', email: '', password: '', terms: false });
   const dispatch = useDispatch<AppDispatch>();
 
   // handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    const { name, value, checked } = e.target;
+    if (name === 'termsCondition') {
+      return setState({ ...state, terms: checked });
+    }
+    setState({ ...state, [name]: value });
   };
 
   // handle user signup function
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await dispatch(
-      signupUser({
-        name: state.name,
-        email: state.email,
-        password: state.password,
-      }),
-    );
-    if ((res.payload as SignupResponse).status === 201) {
-      toast.success('Signup successful. Login to continue');
-      handleGotoLogin();
+    const { name, email, password, terms } = state;
+    if (!name || !email || !password || !terms) {
+      return toast.error('Please fill all the fields and agree to the terms and conditions');
+    }
+    try {
+      const { payload } = await dispatch(
+        signupUser({
+          name: state.name,
+          email: state.email,
+          password: state.password,
+        }),
+      );
+      if (payload.status === 201) {
+        toast.success('Signup successful. Login to continue');
+        handleGotoLogin();
+      }
+      if (payload.status === 400) {
+        toast.error('Invalid input data or email already exists');
+      }
+    } catch (error) {
+      toast.error('Something went wrong');
     }
   };
 
@@ -82,6 +96,8 @@ const Signup = () => {
               name='termsCondition'
               id='termsCondition'
               className='cursor-pointer accent-orange-500'
+              checked={state.terms}
+              onChange={handleChange}
             />
             <label htmlFor='termsCondition' className='ml-2 cursor-pointer select-none'>
               By continuing. I agree to the terms of use & privacy policy

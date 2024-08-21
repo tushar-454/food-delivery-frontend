@@ -19,12 +19,14 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const { payload } = await dispatch(logout());
-      if ((payload as { status: number }).status === 204) {
-        toast.success('Logout successfully');
+      if (payload.status === 200) {
         navigate('/');
+        toast.success('Logout successfully');
+      } else {
+        toast.error('Something went wrong');
       }
     } catch (error) {
-      toast.error('Logout failed');
+      toast.error('Something went wrong');
     }
   };
 

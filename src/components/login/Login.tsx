@@ -5,31 +5,42 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../api/auth';
 import { login, signup } from '../../features/publicState/publicStateSlices';
 import { AppDispatch } from '../../store/store';
-import { LoginResponse } from '../../types/authSlicesTypes';
 
 const Login = () => {
-  const [state, setState] = useState({ email: '', password: '' });
+  const [state, setState] = useState({ email: '', password: '', terms: false });
   const dispatch = useDispatch<AppDispatch>();
 
   // handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    const { name, value, checked } = e.target;
+    if (name === 'termsCondition') {
+      return setState({ ...state, terms: checked });
+    }
+    setState({ ...state, [name]: value });
   };
   // handle user login function
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await dispatch(
-      loginUser({
-        email: state.email,
-        password: state.password,
-      }),
-    );
-    if (res.payload === undefined) {
-      toast.error('Invalid email or password');
+    const { email, password, terms } = state;
+    if (!email || !password || !terms) {
+      return toast.error('Please fill all the fields and agree to the terms and conditions');
     }
-    if ((res.payload as LoginResponse).status === 200) {
-      dispatch(login());
-      toast.success('Login successful');
+    try {
+      const { payload } = await dispatch(
+        loginUser({
+          email: state.email,
+          password: state.password,
+        }),
+      );
+      if (payload.status === 400) {
+        toast.error('Invalid email or password');
+      }
+      if (payload.status === 200) {
+        dispatch(login());
+        toast.success('Login successful');
+      }
+    } catch (error) {
+      toast.error('Something went wrong');
     }
   };
 
@@ -75,6 +86,8 @@ const Login = () => {
               name='termsCondition'
               id='termsCondition'
               className='cursor-pointer accent-orange-500'
+              checked={state.terms}
+              onChange={handleChange}
             />
             <label htmlFor='termsCondition' className='ml-2 cursor-pointer select-none'>
               By continuing. I agree to the terms of use & privacy policy
