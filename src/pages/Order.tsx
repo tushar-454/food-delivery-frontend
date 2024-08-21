@@ -27,18 +27,17 @@ const Order = () => {
   const [isProfileUpdate, setIsProfileUpdate] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { fName, lName, city, country, place, street, zip, state, phone } = profile;
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
+  };
+
+  const handleUpdateProfile = async () => {
+    const { fName, lName, city, country, place, street, zip, state, phone } = profile;
     if (fName && lName && city && country && place && street && zip && state && phone) {
       setIsProfileUpdate(true);
     } else {
       setIsProfileUpdate(false);
     }
-  };
-
-  const handleUpdateProfile = async () => {
-    const { fName, lName, city, country, place, street, zip, state, phone } = profile;
     try {
       const updateData = {
         name: `${fName} ${lName}`,
@@ -65,10 +64,18 @@ const Order = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      const { name, phone } = user;
+      const { city, country, place, street, zip, state } = user.address;
+      if (name && city && country && place && street && zip && state && phone) {
+        setIsProfileUpdate(true);
+      }
+    }
+
     if (!isLoading && user) {
       const fName = user?.name.split(' ')[0];
       const lName = user?.name.split(' ')[1];
-      if (user.address && user.phone) {
+      if (user.address || user.phone) {
         const { city, country, place, street, zip, state } = user.address;
         return setProfile({
           ...initialState,

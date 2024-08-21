@@ -1,7 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { deleteCarts } from '../../api/cart';
 import { deleteCartLocalAll } from '../../features/cart/cartSlices';
 import { AppDispatch } from '../../store/store';
@@ -11,11 +11,12 @@ import axios from '../../utils/axios';
 const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) => {
   const dispatch = useDispatch<AppDispatch>();
   const total = cart?.reduce((acc, item) => acc + item.total, 0);
+  const navigate = useNavigate();
 
   // handle order creation
   const handleOrder = async () => {
     if (!isProfileUpdate) {
-      return toast.error('Please update your profile first');
+      return toast.error('Please fill up your delivery information first');
     }
     try {
       const order = {
@@ -31,6 +32,7 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
         dispatch(deleteCartLocalAll());
         const cartIds = cart.map((crt) => crt._id);
         await dispatch(deleteCarts(cartIds.join(',')));
+        navigate('/profile/myorders');
       }
     } catch (error) {
       toast.error('Something went wrong while placing order');
