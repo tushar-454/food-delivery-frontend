@@ -1,6 +1,7 @@
 import addIcon from './add_icon_white.png';
 import appstore from './app_store.png';
 import cart from './basket_icon.png';
+import firstLoader from './first-loader.gif';
 import carouselImg from './header_img.png';
 import loader from './loader.gif';
 import logo from './logo.png';
@@ -22,6 +23,7 @@ const assets = {
   addIcon,
   logout,
   loader,
+  firstLoader,
 };
 
 export default assets;
