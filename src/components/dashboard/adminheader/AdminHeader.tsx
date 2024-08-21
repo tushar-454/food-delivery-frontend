@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../../api/auth';
 import assets from '../../../assets/assets';
+import { logoutLocal } from '../../../features/auth/authSlices';
 import { AppDispatch } from '../../../store/store';
 
 const AdminHeader = () => {
@@ -12,12 +13,15 @@ const AdminHeader = () => {
   const handleLogout = async () => {
     try {
       const { payload } = await dispatch(logout());
-      if ((payload as { status: number }).status === 204) {
-        toast.success('Logout successfully');
+      if (payload.status === 200) {
+        dispatch(logoutLocal());
         navigate('/');
+        toast.success('Logout successfully');
+      } else {
+        toast.error('Something went wrong');
       }
     } catch (error) {
-      toast.error('Logout failed');
+      toast.error('Something went wrong');
     }
   };
   return (

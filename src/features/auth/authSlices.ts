@@ -11,7 +11,13 @@ const initialState: initialStateType = {
 const authSlices = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutLocal: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -64,4 +70,5 @@ const authSlices = createSlice({
   },
 });
 
+export const { logoutLocal } = authSlices.actions;
 export default authSlices.reducer;

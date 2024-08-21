@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { token } from '../api/auth';
 import { getCarts } from '../api/cart';
 import assets from '../assets/assets';
@@ -16,6 +16,7 @@ const Root = () => {
   const isSignup = useSelector((state: RootState) => state.publicStates[1].signup);
   const dispatch = useDispatch<AppDispatch>();
   const [loader, setLoader] = useState(true);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(token());
@@ -36,7 +37,7 @@ const Root = () => {
       <>
         <Header />
         <Outlet />
-        <Footer />
+        {pathname.includes('profile') ? null : <Footer />}
         {isLogin && <Login />}
         {isSignup && <Signup />}
       </>

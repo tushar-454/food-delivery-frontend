@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../../api/auth';
 import assets from '../../assets/assets';
+import { logoutLocal } from '../../features/auth/authSlices';
 import { login } from '../../features/publicState/publicStateSlices';
 import { AppDispatch, RootState } from '../../store/store';
 import Container from '../shared/Container';
@@ -20,6 +21,7 @@ const Header = () => {
     try {
       const { payload } = await dispatch(logout());
       if (payload.status === 200) {
+        dispatch(logoutLocal());
         navigate('/');
         toast.success('Logout successfully');
       } else {
