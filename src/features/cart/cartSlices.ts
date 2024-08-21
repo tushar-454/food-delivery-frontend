@@ -19,6 +19,18 @@ const cartSlices = createSlice({
     deleteCartLocalAll: (state) => {
       state.carts = [];
     },
+    updateCartLocal: (state, { payload }) => {
+      state.carts = state.carts.map((cart) => {
+        if (cart._id === payload._id) {
+          return {
+            ...cart,
+            quantity: payload.quantity,
+            total: payload.quantity * cart.price,
+          };
+        }
+        return cart;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -36,7 +48,7 @@ const cartSlices = createSlice({
         state.isError = true;
       })
       .addCase(updateCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.isError = false;
       })
       .addCase(updateCart.fulfilled, (state, { payload }) => {
@@ -90,5 +102,5 @@ const cartSlices = createSlice({
   },
 });
 
-export const { deleteCartLocal, deleteCartLocalAll } = cartSlices.actions;
+export const { deleteCartLocal, deleteCartLocalAll, updateCartLocal } = cartSlices.actions;
 export default cartSlices.reducer;
