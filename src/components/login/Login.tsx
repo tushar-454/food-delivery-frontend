@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../api/auth';
 import { login, signup } from '../../features/publicState/publicStateSlices';
 import { AppDispatch } from '../../store/store';
+import Spinner from '../shared/Spinner';
 
 const Login = () => {
   const [state, setState] = useState({ email: '', password: '', terms: false });
   const dispatch = useDispatch<AppDispatch>();
+  const [loading, setLoading] = useState(false);
 
   // handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +23,11 @@ const Login = () => {
   // handle user login function
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const { email, password, terms } = state;
     if (!email || !password || !terms) {
-      return toast.error('Please fill all the fields and agree to the terms and conditions');
+      toast.error('Please fill all the fields and agree to the terms and conditions');
+      return setLoading(false);
     }
     try {
       const { payload } = await dispatch(
@@ -41,6 +45,8 @@ const Login = () => {
       }
     } catch (error) {
       toast.error('Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,8 +84,8 @@ const Login = () => {
               value={state.password}
               onChange={handleChange}
             />
-            <button type='submit' className='bgOrangeBtn my-10 block w-full'>
-              Login
+            <button type='submit' disabled={loading} className='bgOrangeBtn my-10 block w-full'>
+              {loading ? <Spinner /> : 'Login'}
             </button>
             <input
               type='checkbox'
