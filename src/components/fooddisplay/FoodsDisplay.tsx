@@ -5,6 +5,7 @@ import { getFoods } from '../../api/food';
 import { AppDispatch, RootState } from '../../store/store';
 import { FoodsDisplayTypes } from '../../types/foodSlicesTypes';
 import Container from '../shared/Container';
+import Loader from '../shared/Loader';
 import FoodDisplayItem from './FoodDisplayItem';
 
 const FoodsDisplay = () => {
@@ -28,7 +29,7 @@ const FoodsDisplay = () => {
           <h2 className='text-2xl font-bold'>Top dishes near you</h2>
         </div>
         {/* all foods display here  */}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <Loader />}
         {isError && (
           <p className='my-10 animate-pulse text-red-500'>Something went wrong getting foods</p>
         )}

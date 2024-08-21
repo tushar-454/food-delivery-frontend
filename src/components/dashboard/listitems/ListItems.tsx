@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAdminFoods } from '../../../api/food';
 import { AppDispatch, RootState } from '../../../store/store';
 import { FoodsDisplayTypes } from '../../../types/foodSlicesTypes';
+import Loader from '../../shared/Loader';
 import ListItem from './ListItem';
 
 const ListItems = () => {
@@ -35,7 +36,7 @@ const ListItems = () => {
                 <td className='p-4 font-bold'>Action</td>
               </tr>
             </thead>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <Loader />}
             {!isError && !isLoading && Array.isArray(foodLists) && (
               <tbody>
                 {foodLists.map((foodList: FoodsDisplayTypes) => (

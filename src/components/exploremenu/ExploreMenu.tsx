@@ -4,6 +4,7 @@ import { getCategorise } from '../../api/categorise';
 import { AppDispatch, RootState } from '../../store/store';
 import { CategoryItemType } from '../../types/categoriseSlicesTypes';
 import Container from '../shared/Container';
+import Loader from '../shared/Loader';
 import ExploreMenuItem from './ExploreMenuItem';
 
 const ExploreMenu = () => {
@@ -25,7 +26,7 @@ const ExploreMenu = () => {
           </p>
         </div>
         {/* all food menus  */}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <Loader />}
         {isError && (
           <p className='my-10 animate-pulse text-red-500'>Something went wrong getting menu</p>
         )}

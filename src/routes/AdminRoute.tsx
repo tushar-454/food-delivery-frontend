@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { logout } from '../api/auth';
+import Loader from '../components/shared/Loader';
 import { AppDispatch, RootState } from '../store/store';
 
 const AdminRoute: React.FC<PrivateRouteProps> = ({ children }) => {
@@ -15,7 +16,7 @@ const AdminRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   if ((isUserLogin ?? {})?.role !== 'admin' && !loading) {
     toast.error('Nop! You are not an admin');

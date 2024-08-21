@@ -4,6 +4,7 @@ import { getCarts } from '../api/cart';
 import CartItem from '../components/cart/CartItem';
 import CartTotal from '../components/shared/CartTotal';
 import Container from '../components/shared/Container';
+import Loader from '../components/shared/Loader';
 import { AppDispatch, RootState } from '../store/store';
 import { CartTypes } from '../types/cartSlicesTypes';
 
@@ -32,7 +33,7 @@ const Cart = () => {
                   <td className='p-2 text-center text-xl font-medium text-neutral-500'>Remove</td>
                 </tr>
               </thead>
-              {isLoading && <p>Loading...</p>}
+              {isLoading && <Loader />}
               {isError && (
                 <p className='my-10 animate-pulse text-red-500'>
                   Something went wrong getting carts

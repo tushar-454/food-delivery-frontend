@@ -6,6 +6,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import Loader from '../components/shared/Loader';
 import { RootState } from '../store/store';
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
@@ -13,7 +14,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const loading = useSelector((state: RootState) => state.auth.isLoading);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   if (!isUserLogin && !loading) {
     toast.error('You need to login first');
