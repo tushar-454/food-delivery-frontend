@@ -85,7 +85,7 @@ const foodSlices = createSlice({
       });
     builder
       .addCase(getSearchFoodsByValue.pending, (state) => {
-        state.isLoading = false;
+        state.isLoading = true;
         state.isError = false;
         state.food = null;
       })
