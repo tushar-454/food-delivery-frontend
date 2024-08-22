@@ -10,12 +10,14 @@ import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
 import Search from '../pages/Search';
 import AdminRoute from './AdminRoute';
+import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',

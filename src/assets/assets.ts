@@ -6,6 +6,7 @@ import carouselImg from './header_img.png';
 import loader from './loader.gif';
 import logo from './logo.png';
 import logout from './logout_icon.png';
+import notfound from './notfound.gif';
 import parcel from './parcel_icon.png';
 import playstore from './play_store.png';
 import profile from './profile_icon.png';
@@ -24,6 +25,7 @@ const assets = {
   logout,
   loader,
   firstLoader,
+  notfound,
 };
 
 export default assets;
