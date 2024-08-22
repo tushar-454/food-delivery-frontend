@@ -8,6 +8,7 @@ import Cart from '../pages/Cart';
 import Home from '../pages/Home';
 import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
+import Search from '../pages/Search';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -43,6 +44,10 @@ const Routes = createBrowserRouter([
             <MyOrders />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/search',
+        element: <Search />,
       },
     ],
   },

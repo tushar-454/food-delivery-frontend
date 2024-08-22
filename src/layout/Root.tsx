@@ -37,7 +37,7 @@ const Root = () => {
       <>
         <Header />
         <Outlet />
-        {pathname.includes('profile') ? null : <Footer />}
+        {pathname.includes('profile') || pathname.includes('search') ? null : <Footer />}
         {isLogin && <Login />}
         {isSignup && <Signup />}
       </>

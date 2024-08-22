@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createFood, deleteFood, getAdminFoods, getFoods } from '../../api/food';
+import {
+  createFood,
+  deleteFood,
+  getAdminFoods,
+  getFoods,
+  getSearchFoodsByValue,
+} from '../../api/food';
 import { initialStateType } from './../../types/foodSlicesTypes';
 
 const initialState: initialStateType = {
@@ -73,6 +79,22 @@ const foodSlices = createSlice({
         state.isError = false;
       })
       .addCase(deleteFood.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.food = null;
+      });
+    builder
+      .addCase(getSearchFoodsByValue.pending, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.food = null;
+      })
+      .addCase(getSearchFoodsByValue.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.food = action.payload.foods;
+      })
+      .addCase(getSearchFoodsByValue.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.food = null;

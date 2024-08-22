@@ -57,7 +57,7 @@ const Signup = () => {
     dispatch(login());
   };
   return (
-    <section className='fixed left-0 top-0 h-full w-full bg-[#00000099]'>
+    <section className='fixed left-0 top-0 z-[99] h-full w-full bg-[#00000099]'>
       <div className='grid w-full place-content-center'>
         {/* Signup divition  */}
         <div className='slowDownToptoBottom mt-32 w-full rounded-lg bg-white p-4 py-5 mmo:w-[375px]'>
