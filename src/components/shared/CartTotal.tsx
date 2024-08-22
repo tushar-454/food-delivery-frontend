@@ -25,6 +25,7 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
           foodId: crt.foodId,
           quantity: crt.quantity,
         })),
+        deliveryFee: 5,
       };
       const res = await axios.post('/user/order', order);
       if (res.status === 201) {
