@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiArrowRightWideFill } from 'react-icons/ri';
 import assets from '../../assets/assets';
 import { CarouselTypes } from '../../types/CarouselTypes';
@@ -13,6 +13,55 @@ const carouselsData: CarouselTypes[] = [
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, nam veritatis aliquid aperiam aspernatur iure architecto, neque eaque aut beatae quasi. Suscipit aspernatur error quasi commodi placeat non dolore libero.',
     image: assets.carouselImg,
     title: 'Order your favourite food here',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider1,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider2,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider3,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider4,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider5,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider6,
+    title: '',
+  },
+  {
+    buttonLink: '',
+    buttonText: '',
+    description: '',
+    image: assets.slider7,
+    title: '',
   },
 ];
 
@@ -35,18 +84,15 @@ const Carousel = () => {
     }
   };
   // auto slide
-  {
-    /*
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((currentSlider) =>
         currentSlider === carouselsData.length - 1 ? 0 : currentSlider + 1,
       );
-    }, 1000 * 10);
+    }, 1000 * 3);
     return () => clearInterval(interval);
   }, []);
-  */
-  }
+
   return (
     <section>
       <Container>
