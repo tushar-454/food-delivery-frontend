@@ -1,17 +1,14 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { deleteCarts } from '../../api/cart';
-import { deleteCartLocalAll } from '../../features/cart/cartSlices';
-import { AppDispatch } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { RootState } from '../../store/store';
 import { CartTotalProps } from '../../types/cartSlicesTypes';
 import axios from '../../utils/axios';
 
 const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.auth.user);
   const total = cart?.reduce((acc, item) => acc + item.total, 0);
-  const navigate = useNavigate();
 
   // handle order creation
   const handleOrder = async () => {
@@ -19,21 +16,20 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
       return toast.error('Please fill up your delivery information first');
     }
     try {
-      const order = {
+      const response = await axios.post('/payment/create-payment', {
+        amount: total + 5,
+        productName: cart.map((crt) => crt.name).join(', '),
+        categories: cart.map((crt) => crt.name).join(', '),
+        user,
         userId: cart[0].userId,
         foodsItems: cart.map((crt) => ({
           foodId: crt.foodId,
           quantity: crt.quantity,
         })),
         deliveryFee: 5,
-      };
-      const res = await axios.post('/user/order', order);
-      if (res.status === 201) {
-        toast.success('Order placed successfully');
-        dispatch(deleteCartLocalAll());
-        const cartIds = cart.map((crt) => crt._id);
-        await dispatch(deleteCarts(cartIds.join(',')));
-        navigate('/profile/myorders');
+      });
+      if (response.status === 200) {
+        window.location.href = response.data.paymentUrl;
       }
     } catch (error) {
       toast.error('Something went wrong while placing order');
