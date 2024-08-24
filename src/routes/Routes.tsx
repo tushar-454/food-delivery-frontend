@@ -51,6 +51,18 @@ const Routes = createBrowserRouter([
         path: '/search',
         element: <Search />,
       },
+      {
+        path: '/success',
+        element: <div> payment succesfull </div>,
+      },
+      {
+        path: '/failed',
+        element: <div> payment failed </div>,
+      },
+      {
+        path: '/cancel',
+        element: <div> payment cancel </div>,
+      },
     ],
   },
   {
