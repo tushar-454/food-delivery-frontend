@@ -4,7 +4,9 @@ import ListItems from '../components/dashboard/listitems/ListItems';
 import Orders from '../components/dashboard/orders/Orders';
 import Admin from '../layout/Admin';
 import Root from '../layout/Root';
+import Cancel from '../pages/Cancel';
 import Cart from '../pages/Cart';
+import Failed from '../pages/Failed';
 import Home from '../pages/Home';
 import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
@@ -54,15 +56,27 @@ const Routes = createBrowserRouter([
       },
       {
         path: '/success',
-        element: <Success />,
+        element: (
+          <PrivateRoute>
+            <Success />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/failed',
-        element: <div> payment failed </div>,
+        element: (
+          <PrivateRoute>
+            <Failed />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/cancel',
-        element: <div> payment cancel </div>,
+        element: (
+          <PrivateRoute>
+            <Cancel />
+          </PrivateRoute>
+        ),
       },
     ],
   },

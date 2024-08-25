@@ -1,7 +1,10 @@
 import addIcon from './add_icon_white.png';
 import appstore from './app_store.png';
 import cart from './basket_icon.png';
+import cancel from './cancle.json';
 import congratulation from './congratulation.json';
+import failed from './failed.json';
+import failedText from './failedtext.json';
 import firstLoader from './first-loader.gif';
 import carouselImg from './header_img.png';
 import loader from './loader.gif';
@@ -44,6 +47,9 @@ const assets = {
   slider7,
   success,
   congratulation,
+  cancel,
+  failed,
+  failedText,
 };
 
 export default assets;

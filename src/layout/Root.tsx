@@ -39,6 +39,8 @@ const Root = () => {
         <Outlet />
         {pathname.includes('profile') ||
         pathname.includes('search') ||
+        pathname.includes('cancel') ||
+        pathname.includes('failed') ||
         pathname.includes('success') ? null : (
           <Footer />
         )}
