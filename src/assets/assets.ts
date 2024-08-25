@@ -1,6 +1,7 @@
 import addIcon from './add_icon_white.png';
 import appstore from './app_store.png';
 import cart from './basket_icon.png';
+import congratulation from './congratulation.json';
 import firstLoader from './first-loader.gif';
 import carouselImg from './header_img.png';
 import loader from './loader.gif';
@@ -18,6 +19,7 @@ import slider4 from './slider4.jpg';
 import slider5 from './slider5.jpg';
 import slider6 from './slider6.jpg';
 import slider7 from './slider7.jpg';
+import success from './success.json';
 
 const assets = {
   logo,
@@ -40,6 +42,8 @@ const assets = {
   slider5,
   slider6,
   slider7,
+  success,
+  congratulation,
 };
 
 export default assets;

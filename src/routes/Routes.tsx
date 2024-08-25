@@ -9,6 +9,7 @@ import Home from '../pages/Home';
 import MyOrders from '../pages/MyOrders';
 import Order from '../pages/Order';
 import Search from '../pages/Search';
+import Success from '../pages/Success';
 import AdminRoute from './AdminRoute';
 import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
@@ -53,7 +54,7 @@ const Routes = createBrowserRouter([
       },
       {
         path: '/success',
-        element: <div> payment succesfull </div>,
+        element: <Success />,
       },
       {
         path: '/failed',
