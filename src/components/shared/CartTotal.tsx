@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { CartTotalProps } from '../../types/cartSlicesTypes';
 import axios from '../../utils/axios';
+import Spinner from './Spinner';
 
 const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) => {
   const user = useSelector((state: RootState) => state.auth.user);
   const total = cart?.reduce((acc, item) => acc + item.total, 0);
+  const [loading, setLoading] = useState(false);
 
   // handle order creation
   const handleOrder = async () => {
@@ -16,6 +18,7 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
       return toast.error('Please fill up your delivery information first');
     }
     try {
+      setLoading(true);
       const response = await axios.post('/payment/create-payment', {
         amount: total + 5,
         productName: cart.map((crt) => crt.name).join(', '),
@@ -33,6 +36,8 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
       }
     } catch (error) {
       toast.error('Something went wrong while placing order');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,8 +64,12 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
         </Link>
       )}
       {asUse === 'order' && (
-        <button onClick={handleOrder} className='bgOrangeBtn mt-5'>
-          Place Order
+        <button
+          onClick={handleOrder}
+          disabled={loading}
+          className='bgOrangeBtn mt-5 min-w-[125px] text-center'
+        >
+          {loading ? <Spinner /> : 'Place Order'}
         </button>
       )}
     </div>
