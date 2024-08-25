@@ -20,9 +20,14 @@ const Root = () => {
 
   useEffect(() => {
     dispatch(token());
-    setTimeout(() => {
+
+    const handleLoad = () => {
       setLoader(false);
-    }, 2000);
+    };
+    window.addEventListener('load', handleLoad);
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
   }, [dispatch]);
   useEffect(() => {
     dispatch(getCarts(user?._id || ''));
