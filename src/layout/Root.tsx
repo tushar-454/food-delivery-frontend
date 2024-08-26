@@ -24,9 +24,13 @@ const Root = () => {
     const handleLoad = () => {
       setLoader(false);
     };
-    window.addEventListener('load', handleLoad);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      handleLoad();
+    } else {
+      window.addEventListener('DOMContentLoaded', handleLoad);
+    }
     return () => {
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener('DOMContentLoaded', handleLoad);
     };
   }, [dispatch]);
   useEffect(() => {
