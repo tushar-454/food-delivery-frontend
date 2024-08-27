@@ -15,7 +15,7 @@ const CartTotal: React.FC<CartTotalProps> = ({ asUse, cart, isProfileUpdate }) =
   // handle order creation
   const handleOrder = async () => {
     if (!isProfileUpdate) {
-      return toast.error('Please fill up your delivery information first');
+      return toast.error('Fill up your shipping details & update');
     }
     try {
       setLoading(true);

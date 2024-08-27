@@ -29,9 +29,11 @@ const Order = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
+    setIsProfileUpdate(false);
   };
 
-  const handleUpdateProfile = async () => {
+  const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const { fName, lName, city, country, place, street, zip, state, phone } = profile;
     if (fName && lName && city && country && place && street && zip && state && phone) {
       setIsProfileUpdate(true);
@@ -112,7 +114,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.fName}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -122,7 +123,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.lName}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
               </div>
               <input
@@ -142,7 +142,6 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.street}
                 onChange={handleInputChange}
-                onBlur={handleUpdateProfile}
               />
               <div className='flex flex-col gap-4 mmo:flex-row'>
                 <input
@@ -153,7 +152,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.city}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -163,7 +161,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.state}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
               </div>
               <div className='flex flex-col gap-4 mmo:flex-row'>
@@ -175,7 +172,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.zip}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
                 <input
                   type='text'
@@ -185,7 +181,6 @@ const Order = () => {
                   className='primaryInput'
                   value={profile.country}
                   onChange={handleInputChange}
-                  onBlur={handleUpdateProfile}
                 />
               </div>
               <input
@@ -196,7 +191,6 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.place}
                 onChange={handleInputChange}
-                onBlur={handleUpdateProfile}
               />
               <input
                 type='tel'
@@ -206,8 +200,8 @@ const Order = () => {
                 className='primaryInput'
                 value={profile.phone}
                 onChange={handleInputChange}
-                onBlur={handleUpdateProfile}
               />
+              <button className='bgBlackBtn inline-block'>Update Profile</button>
             </form>
           </div>
           {/* cart total  */}
