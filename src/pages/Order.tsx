@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../api/auth';
 import CartTotal from '../components/shared/CartTotal';
 import Container from '../components/shared/Container';
+import Spinner from '../components/shared/Spinner';
 import { AppDispatch, RootState } from '../store/store';
 import { UpdateProfileInitialState } from '../types/authSlicesTypes';
 
@@ -25,6 +26,7 @@ const Order = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [profile, setProfile] = useState({ ...initialState });
   const [isProfileUpdate, setIsProfileUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,6 +43,7 @@ const Order = () => {
       setIsProfileUpdate(false);
     }
     try {
+      setLoading(true);
       const updateData = {
         name: `${fName} ${lName}`,
         city: city,
@@ -62,6 +65,8 @@ const Order = () => {
       }
     } catch (error) {
       toast.error('Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -201,7 +206,9 @@ const Order = () => {
                 value={profile.phone}
                 onChange={handleInputChange}
               />
-              <button className='bgBlackBtn inline-block'>Update Profile</button>
+              <button className='bgBlackBtn inline-block min-w-[142px]' disabled={loading}>
+                {loading ? <Spinner /> : 'Update Profile'}
+              </button>
             </form>
           </div>
           {/* cart total  */}
