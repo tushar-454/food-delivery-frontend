@@ -9,6 +9,7 @@ import { CategoryItemType } from '../../../types/categoriseSlicesTypes';
 import { createFoodItemType } from '../../../types/foodSlicesTypes';
 import Rating from '../../../utils/Rating';
 import { uploadImage } from '../../../utils/uploadImg';
+import Spinner from '../../shared/Spinner';
 
 const initialState: createFoodItemType = {
   image: '',
@@ -23,6 +24,7 @@ const AddItem = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [state, setState] = useState({ ...initialState });
   const [image, setImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   const [isLPVisible, setIsLPVisible] = useState(false);
 
   // food item add handle change
@@ -49,17 +51,34 @@ const AddItem = () => {
   // handle add food item submit
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (image) {
-      const imageUrl = await uploadImage(image);
-      const food = { ...state, image: imageUrl };
-      const { payload } = await dispatch(createFood(food));
-      if (payload) {
-        setState({ ...initialState });
-        setImage(null);
-        toast.success('Food item added successfully');
-      } else {
-        toast.error('Failed to add food item');
+    const { name, description, category, price } = state;
+    if (!name || !description || !category || !price) {
+      toast.error('Please fill all the fields');
+      return;
+    }
+    try {
+      setLoading(true);
+      if (image) {
+        const imageUrl = await uploadImage(image);
+        const food = { ...state, image: imageUrl };
+        const { payload } = await dispatch(createFood(food));
+        if (payload.status === 400) {
+          toast.error('Please fill all the fields');
+          return;
+        }
+        if (payload.status === 201) {
+          setState({ ...initialState });
+          setImage(null);
+          toast.success('Food item added successfully');
+        } else {
+          toast.error('Failed to add food item');
+        }
       }
+    } catch (error) {
+      toast.error('Failed to add food item');
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -147,8 +166,8 @@ const AddItem = () => {
             />
           </div>
         </div>
-        <button type='submit' className='bgBlackBtn inline-block px-10'>
-          Add
+        <button type='submit' disabled={loading} className='bgBlackBtn inline-block px-10'>
+          {loading ? <Spinner /> : 'Add Food'}
         </button>
       </form>
       {/* live preview here  */}

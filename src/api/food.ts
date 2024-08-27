@@ -8,7 +8,9 @@ export const createFood = createAsyncThunk('food/createFood', async (food: creat
     const res = await axios.post('/admin/food', food);
     return res.data;
   } catch (error) {
-    throw new Error();
+    if (isAxiosError(error)) {
+      return error.response?.data;
+    }
   }
 });
 

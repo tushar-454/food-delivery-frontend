@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { MdDeleteForever, MdModeEditOutline } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { deleteFood } from '../../../api/food';
@@ -11,8 +12,16 @@ const ListItem: React.FC<FoodListProps> = ({ foodList }) => {
 
   // handle food delete
   const handleDelete = async (id: string) => {
-    await dispatch(deleteFood(id));
-    dispatch(deleteFoodLocal(id));
+    const confirm = window.confirm('Are you sure you want to delete this food item?');
+    try {
+      if (confirm) {
+        await dispatch(deleteFood(id));
+        dispatch(deleteFoodLocal(id));
+        toast.success('Food item deleted successfully');
+      }
+    } catch (error) {
+      toast.error('Failed to delete food item');
+    }
   };
 
   return (
