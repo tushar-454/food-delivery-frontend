@@ -23,6 +23,16 @@ const foodSlices = createSlice({
         state.food = state.food?.filter((item) => item._id !== payload);
       }
     },
+    updateFoodLocal: (state, { payload }) => {
+      if (Array.isArray(state.food)) {
+        state.food = state.food?.map((item) => {
+          if (item._id === payload._id) {
+            return payload.food;
+          }
+          return item;
+        });
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -102,5 +112,5 @@ const foodSlices = createSlice({
   },
 });
 
-export const { deleteFoodLocal } = foodSlices.actions;
+export const { deleteFoodLocal, updateFoodLocal } = foodSlices.actions;
 export default foodSlices.reducer;

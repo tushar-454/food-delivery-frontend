@@ -1,15 +1,23 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminCategories } from '../../../api/categorise';
 import { createFood } from '../../../api/food';
 import assets from '../../../assets/assets';
+import { updateFoodLocal } from '../../../features/food/foodSlices';
+import { setIsEditFormVisible } from '../../../features/publicState/publicStateSlices';
 import { AppDispatch, RootState } from '../../../store/store';
 import { CategoryItemType } from '../../../types/categoriseSlicesTypes';
 import { createFoodItemType } from '../../../types/foodSlicesTypes';
+import axios from '../../../utils/axios';
 import Rating from '../../../utils/Rating';
 import { uploadImage } from '../../../utils/uploadImg';
 import Spinner from '../../shared/Spinner';
+
+interface AddItemProps {
+  responsible: string;
+  id?: string;
+}
 
 const initialState: createFoodItemType = {
   image: '',
@@ -19,7 +27,7 @@ const initialState: createFoodItemType = {
   price: '',
 };
 
-const AddItem = () => {
+const AddItem: React.FC<AddItemProps> = ({ responsible, id }) => {
   const { isLoading, categorise, isError } = useSelector((state: RootState) => state.categorise);
   const dispatch = useDispatch<AppDispatch>();
   const [state, setState] = useState({ ...initialState });
@@ -52,7 +60,7 @@ const AddItem = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { name, description, category, price } = state;
-    if (!name || !description || !category || !price) {
+    if (!name || !description || !category || !price || !image) {
       toast.error('Please fill all the fields');
       return;
     }
@@ -82,6 +90,62 @@ const AddItem = () => {
     }
   };
 
+  // handle food edit
+  const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { name, description, category, price } = state;
+    if (!name || !description || !category || !price) {
+      toast.error('Please fill all the fields');
+      return;
+    }
+    try {
+      setLoading(true);
+      let imageUrl = state.image;
+      if (image) {
+        imageUrl = await uploadImage(image);
+      }
+      const food = { ...state, image: imageUrl };
+      const res = await axios.put(`/admin/food/${id}`, food);
+      if (res.status === 400) {
+        toast.error('Please fill all the fields');
+        return;
+      }
+      if (res.status === 200) {
+        setState({ ...initialState });
+        setImage(null);
+        dispatch(setIsEditFormVisible());
+        dispatch(updateFoodLocal({ _id: id, food }));
+        toast.success('Food item update successfully');
+      } else {
+        toast.error('Failed to update food item');
+      }
+    } catch (error) {
+      toast.error('Failed to add food item');
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (responsible === 'updateFood') {
+      const fetchFood = async () => {
+        if (id) {
+          const res = await axios.get(`/admin/food/${id}`);
+          const food = res.data.food;
+          setState({
+            image: food.image,
+            name: food.name,
+            description: food.description,
+            category: food.category,
+            price: food.price,
+          });
+        }
+      };
+      fetchFood();
+    }
+  }, [dispatch, id, responsible]);
+
   useEffect(() => {
     dispatch(getAdminCategories());
   }, [dispatch]);
@@ -90,7 +154,7 @@ const AddItem = () => {
     <div className='flex flex-col gap-10 lg:flex-row'>
       <form
         className='w-full space-y-5 md:w-4/5 lg:w-3/5 xl:w-1/2 2xl:w-1/3'
-        onSubmit={handleSubmit}
+        onSubmit={(e) => (responsible === 'updateFood' ? handleEdit(e) : handleSubmit(e))}
       >
         <div className='grid gap-2'>
           <label htmlFor='image' className='text-lg text-neutral-500'>
@@ -167,7 +231,7 @@ const AddItem = () => {
           </div>
         </div>
         <button type='submit' disabled={loading} className='bgBlackBtn inline-block px-10'>
-          {loading ? <Spinner /> : 'Add Food'}
+          {loading ? <Spinner /> : responsible === 'updateFood' ? 'Update Food' : 'Add Food'}
         </button>
       </form>
       {/* live preview here  */}

@@ -13,6 +13,7 @@ const publicStatesInitialState = [
   {
     searchBar: false,
   },
+  { isEditFormVisible: false },
 ];
 
 const publicStates = createSlice({
@@ -31,8 +32,12 @@ const publicStates = createSlice({
     searchBarAction: (state) => {
       state[3].searchBar = !state[3].searchBar;
     },
+    setIsEditFormVisible: (state) => {
+      state[4].isEditFormVisible = !state[4].isEditFormVisible;
+    },
   },
 });
 
 export default publicStates.reducer;
-export const { login, signup, cartItem, searchBarAction } = publicStates.actions;
+export const { login, signup, cartItem, searchBarAction, setIsEditFormVisible } =
+  publicStates.actions;

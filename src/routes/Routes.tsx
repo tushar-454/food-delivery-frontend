@@ -89,7 +89,7 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <AddItem />
+              <AddItem responsible='add' />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -99,7 +99,7 @@ const Routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <AddItem />
+              <AddItem responsible='add' />
             </AdminRoute>
           </PrivateRoute>
         ),
