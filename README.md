@@ -1,3 +1,8 @@
+### Admin Credientials
+Email: tushar@live.com
+Password: 111111
+
+
 # Food Delivery Frontend
 
 ![Project Logo](./src/assets/logo.png)
