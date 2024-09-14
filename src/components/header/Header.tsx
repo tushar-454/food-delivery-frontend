@@ -7,7 +7,7 @@ import { logoutLocal } from '../../features/auth/authSlices';
 import { login } from '../../features/publicState/publicStateSlices';
 import { AppDispatch, RootState } from '../../store/store';
 import Container from '../shared/Container';
-import { NavsDesktop, NavsMobile } from './Navs';
+import { NavsDesktop } from './Navs';
 
 const Header = () => {
   const isUserLogin = useSelector((state: RootState) => state.auth.user);
@@ -47,9 +47,7 @@ const Header = () => {
           <div className='hidden lg:block'>
             <NavsDesktop />
           </div>
-          <div className='block lg:hidden'>
-            <NavsMobile />
-          </div>
+          <div className='block lg:hidden'>{/* <NavsMobile /> */}</div>
           {/* header component search+cart+signin button if user not logged in  */}
           {/* header component search+cart+profile button if user logged in  */}
           <div className='flex items-center justify-center gap-5 sm:gap-8'>
