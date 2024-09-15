@@ -15,7 +15,7 @@ const Footer = () => {
               {/* footer logo */}
               <div className='space-y-5'>
                 <Link to='/' onClick={() => scrollTo(0, 0)}>
-                  <img src={assets.logo} alt='logo' />
+                  <img src={assets.logo} loading='lazy' alt='logo' />
                 </Link>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptates eum

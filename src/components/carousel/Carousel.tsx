@@ -103,7 +103,7 @@ const Carousel = () => {
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {carouselsData.map((carousel: CarouselTypes) => (
-              <CarouselItem key={Math.random()} carousel={carousel} />
+              <CarouselItem key={carousel.title} carousel={carousel} />
             ))}
           </div>
 

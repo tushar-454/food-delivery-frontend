@@ -32,7 +32,7 @@ const AdminHeader = () => {
           {/* header component logo  */}
           <div>
             <Link to='/'>
-              <img src={assets.logo} alt='logo' className='w-24 lmo:w-auto' />
+              <img src={assets.logo} loading='lazy' alt='logo' className='w-24 lmo:w-auto' />
             </Link>
             <span className='mx-2 font-semibold'>Admin Panel</span>
           </div>

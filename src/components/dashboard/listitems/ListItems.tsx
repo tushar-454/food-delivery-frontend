@@ -40,7 +40,7 @@ const ListItems = () => {
             {!isError && !isLoading && Array.isArray(foodLists) && (
               <tbody>
                 {foodLists.map((foodList: FoodsDisplayTypes) => (
-                  <ListItem key={Math.random()} foodList={foodList} />
+                  <ListItem key={foodList._id} foodList={foodList} />
                 ))}
               </tbody>
             )}

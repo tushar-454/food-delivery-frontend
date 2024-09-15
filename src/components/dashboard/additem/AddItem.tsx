@@ -162,7 +162,7 @@ const AddItem: React.FC<AddItemProps> = ({ responsible, id }) => {
           </label>
           <input type='file' name='image' id='image' hidden onChange={imageHandleChange} />
           <label htmlFor='image'>
-            <img src={assets.addIcon} alt='add icon' className='cursor-pointer' />
+            <img src={assets.addIcon} loading='lazy' alt='add icon' className='cursor-pointer' />
           </label>
         </div>
         <div className='grid gap-1'>

@@ -68,6 +68,7 @@ const FoodDisplayItem: React.FC<FoodItemProps> = ({ foodItem }) => {
       <div className='relative overflow-hidden'>
         <img
           src={image}
+          loading='lazy'
           alt={name}
           className='h-[300px] w-full rounded-t-lg object-cover transition-all hover:scale-110'
         />

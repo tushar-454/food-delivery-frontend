@@ -8,15 +8,15 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
   return (
     <div className='relative mt-1'>
       <div className='flex gap-1'>
-        {blankArr.map(() => (
-          <span key={Math.random()} className='text-lg'>
+        {blankArr.map((_, index) => (
+          <span key={index} className='text-lg'>
             <IoIosStar className='text-neutral-300' />
           </span>
         ))}
       </div>
       <div className='absolute left-0 top-0 flex gap-1'>
-        {ratingArr.map(() => (
-          <span key={Math.random()} className='text-lg text-orange-500'>
+        {ratingArr.map((_, index) => (
+          <span key={index} className='text-lg text-orange-500'>
             <IoIosStar />
           </span>
         ))}

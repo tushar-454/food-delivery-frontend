@@ -22,7 +22,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
   return (
     <div className='mb-5 flex min-w-[1024px] items-center justify-between space-x-6 whitespace-nowrap rounded-lg border border-orange-500 p-4'>
       <div className='flex items-center gap-2'>
-        <img src={assets.parcel} alt='parcel icon' />
+        <img src={assets.parcel} loading='lazy' alt='parcel icon' />
         <div className='flex flex-col gap-2'>
           {orderItems?.map((orderItem: OrderItemType) => (
             <span key={orderItem._id} className='font-medium'>

@@ -6,7 +6,7 @@ import congratulation from './congratulation.json';
 import failed from './failed.json';
 import failedText from './failedtext.json';
 import firstLoader from './first-loader.gif';
-import carouselImg from './header_img.png';
+import carouselImg from './header_img.webp';
 import loader from './loader.gif';
 import logo from './logo.png';
 import logout from './logout_icon.png';

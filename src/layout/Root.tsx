@@ -40,7 +40,7 @@ const Root = () => {
     <>
       {loader && (
         <div className='fixed left-1/2 top-1/2 z-[999999999] flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white'>
-          <img src={assets.firstLoader} alt='loader' className='scale-75' />
+          <img src={assets.firstLoader} loading='lazy' alt='loader' className='scale-75' />
         </div>
       )}
       <>

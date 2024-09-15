@@ -35,7 +35,7 @@ const ListItem: React.FC<FoodListProps> = ({ foodList }) => {
     <>
       <tr className='transition-all hover:bg-neutral-200/50'>
         <td className='min-w-12 border-y border-l p-4'>
-          <img src={image} alt={name} className='w-12' />
+          <img src={image} loading='lazy' alt={name} className='w-12' />
         </td>
         <td className='border-y p-4'>{name}</td>
         <td className='whitespace-nowrap border-y p-4'>{category}</td>

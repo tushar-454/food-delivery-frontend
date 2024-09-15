@@ -40,7 +40,7 @@ const Header = () => {
           {/* header component logo  */}
           <div>
             <Link to='/'>
-              <img src={assets.logo} alt='logo' className='w-24 lmo:w-auto' />
+              <img src={assets.logo} loading='lazy' alt='logo' className='w-24 lmo:w-auto' />
             </Link>
           </div>
           {/* header component nav */}
@@ -52,10 +52,10 @@ const Header = () => {
           {/* header component search+cart+profile button if user logged in  */}
           <div className='flex items-center justify-center gap-5 sm:gap-8'>
             <Link to={'/search'}>
-              <img src={assets.search} alt='search_icon' />
+              <img src={assets.search} loading='lazy' alt='search_icon' />
             </Link>
             <Link to={'/cart'} className='relative'>
-              <img src={assets.cart} alt='cart_icon' />
+              <img src={assets.cart} loading='lazy' alt='cart_icon' />
               <span className='absolute -right-4 -top-2 grid size-6 place-content-center rounded-full bg-orange-500 p-2 text-white'>
                 {(carts && Array.isArray(carts) && carts.length) || 0}
               </span>
@@ -65,17 +65,17 @@ const Header = () => {
               <>
                 {isUserLogin?.role === 'admin' ? (
                   <Link to={'/dashboard'}>
-                    <img src={assets.profile} alt='profile_icon' />
+                    <img src={assets.profile} loading='lazy' alt='profile_icon' />
                   </Link>
                 ) : (
                   <>
                     {pathname.includes('profile') ? (
                       <button onClick={handleLogout}>
-                        <img src={assets.logout} alt='logout_icon' />
+                        <img src={assets.logout} loading='lazy' alt='logout_icon' />
                       </button>
                     ) : (
                       <Link to={'/profile/myorders'}>
-                        <img src={assets.profile} alt='profile_icon' />
+                        <img src={assets.profile} loading='lazy' alt='profile_icon' />
                       </Link>
                     )}
                   </>

@@ -25,7 +25,7 @@ const AdminOrderItem: React.FC<OrderItemProps> = ({ order }) => {
   return (
     <div className='mb-5 flex min-w-[1024px] items-start justify-between space-x-6 whitespace-nowrap rounded-lg border border-orange-500 p-4 lg:w-auto'>
       <div className='flex min-w-40 items-start gap-4'>
-        <img src={assets.parcel} alt='parcel icon' />
+        <img src={assets.parcel} loading='lazy' alt='parcel icon' />
         <div className='flex flex-col gap-2'>
           <div className='flex gap-2'>
             {orderItems?.map((orderItem: OrderItemType) => (
